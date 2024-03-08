@@ -1,6 +1,9 @@
+#ifndef QST2LIB_H
+#define QST2LIB_H
+
 #include <stdlib.h>
 #include <stdio.h>
-#include "../Library_Tests/AbstractMachineSingly.h"
+#include "AbstractMachineSingly.h"
 
 // Structures
 typedef struct DynamicArray
@@ -87,7 +90,6 @@ void removeMultiplesARR(DynamicArray *arr, int multiple)
 LinkedList *createLinkedList()
 {
     LinkedList *list = (LinkedList *)malloc(sizeof(LinkedList));
-    ass_adr(list->head,NULL)
     list->head = NULL;
     list->size = 0;
     return list;
@@ -99,7 +101,7 @@ void destroyLinkedList(LinkedList *list)
     cell *next;
     while (current != NULL)
     {
-        next = next(current);
+        next = current->next;
         free(current);
         current = next;
     }
@@ -108,19 +110,21 @@ void destroyLinkedList(LinkedList *list)
 
 void addToLinkedList(LinkedList *list, int element)
 {
-    // cell *newcell = (cell *)malloc(sizeof(cell));
-    allocate_cell(&newcell);
-    ass_value(newcell, element);
+    cell *newcell = (cell *)malloc(sizeof(cell));
     newcell->value = element;
     newcell->next = NULL;
 
     // If the list is empty, we set the newcell to head
-    if(list->head == NULL) {
+    if (list->head == NULL)
+    {
         list->head = newcell;
-    } else {
+    }
+    else
+    {
         // Go through list to find the last element
         cell *current = list->head;
-        while (current->next != NULL){
+        while (current->next != NULL)
+        {
             current = current->next;
         }
         // Append newcell to the last element
@@ -203,72 +207,4 @@ void generatePrimesLinkedList(LinkedList *primes, int n)
     }
 }
 
-// Main Test
-int main()
-{
-    int n;
-
-    // Get user input for the upper bound
-    printf("Enter the upper bound (n): ");
-    scanf("%d", &n);
-
-    // Generate primes using dynamic array
-    DynamicArray *dynamicPrimes = createDynamicArray(10);
-    generatePrimesDynamicArray(dynamicPrimes, n);
-    printf("Primes using Dynamic Array: 2 ");
-    for (size_t i = 0; i < dynamicPrimes->size; ++i)
-    {
-        printf("%d ", dynamicPrimes->array[i]);
-    }
-    printf("\n");
-    destroyDynamicArray(dynamicPrimes);
-
-    // Generate primes using linked list
-    LinkedList *linkedListPrimes = createLinkedList();
-    generatePrimesLinkedList(linkedListPrimes, n);
-    printf("Primes using Linked List: 2 ");
-    cell *current = linkedListPrimes->head;
-    while (current != NULL)
-    {
-        printf("%d ", current->value);
-        current = current->next;
-    }
-    printf("\n");
-
-
-// indexing the list by range for printing prime numbers between two values
-
-cell * temp1 = linkedListPrimes->head;
-
-cell * head2;
-
-    int max,min;
-    printf("the max bound : ");
-    scanf("%d",&max);
-    printf("the min bound : ");
-    scanf("%d",&min);
-    while(temp1->next!=NULL){
-        if(temp1->value>=min){
-            head2=temp1;
-            break;
-        }
-    temp1=temp1->next;
-    }
-
-    cell * temp2 = temp1;
-    while(temp2!=NULL){
-        if(temp2->value>max){
-            break;
-        }
-        temp2 = temp2->next;
-    }
-    temp1=head2;
-    while(temp1!=temp2){
-        printf("%d | ",temp1->value);
-        temp1 = temp1->next;
-    }
-
-
-    destroyLinkedList(linkedListPrimes);
-    return 0;
-}
+#endif
