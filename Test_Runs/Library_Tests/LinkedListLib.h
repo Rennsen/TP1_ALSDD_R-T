@@ -5,11 +5,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+typedef struct LinkedList LinkedList;
 typedef struct cell
 {
     int value;
     bool deleted;
     struct cell *next;
+    LinkedList *sublist;
 } cell;
 
 void allocate_cell(cell **p);
@@ -79,11 +81,11 @@ void ass_adr(cell *p, cell *q)
 #endif
 
 // Linked List Implementation
-typedef struct LinkedList
+struct LinkedList
 {
     cell *head;
     size_t size;
-} LinkedList;
+};
 
 LinkedList *createLinkedList()
 {
