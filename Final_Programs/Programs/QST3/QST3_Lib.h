@@ -1,10 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
 // Linked List Abstract Machine Library
-#ifndef AbstrMachSingly_H
-#define AbstrMachSingly_H
+#ifndef QST3LIB_H
+#define QST3LIB_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -89,8 +85,6 @@ void ass_range_index(cell *p, int index)
         p->rangeIndex = index;
     }
 }
-
-#endif
 
 // Linked List Implementation
 typedef struct LinkedList
@@ -223,38 +217,4 @@ void displayByRange(LinkedList *primes, int range)
     printf("\n");
 }
 
-// Main Test
-int main()
-{
-    int n, range;
-
-    printf("Enter the upper bound (n): ");
-    scanf("%d", &n);
-    printf("Enter the range: ");
-    scanf("%d", &range);
-
-    // Create and display initial list using linked list
-    LinkedList *primesList = createLinkedList();
-    // Generate primes using linked list
-    generatePrimesLinkedList(primesList, n);
-    cell *current;
-    current = primesList->head;
-    while (current != NULL)
-    {
-        if (!current->deleted)
-        {
-            printf("%d ", value(current));
-        }
-        current = next(current);
-    }
-    printf("\n");
-    // Index by range
-    indexByRange(primesList, range);
-
-    // Display by range
-    printf("Prime Numbers by Range (%d): |", range);
-    displayByRange(primesList, range);
-
-    destroyLinkedList(primesList);
-    return 0;
-}
+#endif

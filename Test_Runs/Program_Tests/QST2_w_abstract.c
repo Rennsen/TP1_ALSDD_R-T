@@ -4,63 +4,63 @@
 #include "../Library_Tests/LinkedListLib.h"
 #include "../Library_Tests/DynamicArrayLibV2.h"
 
-// Prime Generation
-void generatePrimesDynamicArray(DynArrMachine *primes, int n)
-{
-    addElement(primes, 2); // Add 2 to the dynamic array
-    for (int i = 3; i <= n; i += 2)
-    {
-        addElement(primes, i);
-    }
+// // Prime Generation
+// void generatePrimesDynamicArray(DynArrMachine *primes, int n)
+// {
+//     addElement(primes, 2); // Add 2 to the dynamic array
+//     for (int i = 3; i <= n; i += 2)
+//     {
+//         addElement(primes, i);
+//     }
 
-    for (size_t i = 0; i < primes->size; ++i)
-    {
-        int currentPrime = getValue(primes, i);
-        if (currentPrime * currentPrime > n)
-        {
-            break;
-        }
-        removeMultiplesARR(primes, currentPrime);
-    }
-}
+//     for (size_t i = 0; i < primes->size; ++i)
+//     {
+//         int currentPrime = getValue(primes, i);
+//         if (currentPrime * currentPrime > n)
+//         {
+//             break;
+//         }
+//         removeMultiplesARR(primes, currentPrime);
+//     }
+// }
 
-void generatePrimesLinkedList(LinkedList *primes, int n)
-{
-    addToLinkedList(primes, 2); // Add 2 to the linked list
-    for (int i = 3; i <= n; i += 2)
-    {
-        addToLinkedList(primes, i);
-    }
+// void generatePrimesLinkedList(LinkedList *primes, int n)
+// {
+//     addToLinkedList(primes, 2); // Add 2 to the linked list
+//     for (int i = 3; i <= n; i += 2)
+//     {
+//         addToLinkedList(primes, i);
+//     }
 
-    cell *current = primes->head;
-    while (current != NULL)
-    {
-        int currentPrime = value(current);
-        if (currentPrime * currentPrime > n)
-        {
-            break;
-        }
-        removeMultiplesLL(primes, currentPrime);
-        current = next(current);
-    }
-}
+//     cell *current = primes->head;
+//     while (current != NULL)
+//     {
+//         int currentPrime = value(current);
+//         if (currentPrime * currentPrime > n)
+//         {
+//             break;
+//         }
+//         removeMultiplesLL(primes, currentPrime);
+//         current = next(current);
+//     }
+// }
 
-// Initial List Creation
-void createInitialListDynamicArray(DynArrMachine *arr, int n)
-{
-    for (int i = 2; i <= n; i++)
-    {
-        addElement(arr, i);
-    }
-}
+// // Initial List Creation
+// void createInitialListDynamicArray(DynArrMachine *arr, int n)
+// {
+//     for (int i = 2; i <= n; i++)
+//     {
+//         addElement(arr, i);
+//     }
+// }
 
-void createInitialListLinkedList(LinkedList *list, int n)
-{
-    for (int i = 2; i <= n; i++)
-    {
-        addToLinkedList(list, i);
-    }
-}
+// void createInitialListLinkedList(LinkedList *list, int n)
+// {
+//     for (int i = 2; i <= n; i++)
+//     {
+//         addToLinkedList(list, i);
+//     }
+// }
 
 // Main Test
 int main()

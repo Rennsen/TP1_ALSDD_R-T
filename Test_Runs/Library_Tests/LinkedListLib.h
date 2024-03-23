@@ -78,8 +78,6 @@ void ass_adr(cell *p, cell *q)
     }
 }
 
-#endif
-
 // Linked List Implementation
 struct LinkedList
 {
@@ -136,3 +134,34 @@ void removeMultiplesLL(LinkedList *list, int multiple)
         current = next(current);
     }
 }
+
+void generatePrimesLinkedList(LinkedList *primes, int n)
+{
+    addToLinkedList(primes, 2); // Add 2 to the linked list
+    for (int i = 3; i <= n; i += 2)
+    {
+        addToLinkedList(primes, i);
+    }
+
+    cell *current = primes->head;
+    while (current != NULL)
+    {
+        int currentPrime = value(current);
+        if (currentPrime * currentPrime > n)
+        {
+            break;
+        }
+        removeMultiplesLL(primes, currentPrime);
+        current = next(current);
+    }
+}
+
+void createInitialListLinkedList(LinkedList *list, int n)
+{
+    for (int i = 2; i <= n; i++)
+    {
+        addToLinkedList(list, i);
+    }
+}
+
+#endif

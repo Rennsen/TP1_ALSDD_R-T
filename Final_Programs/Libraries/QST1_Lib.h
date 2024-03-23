@@ -1,3 +1,6 @@
+#ifndef QST1LIB_H
+#define QST1LIB_H
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -31,19 +34,4 @@ void searchPrimesRecursive(int n, int current)
     }
 }
 
-int main()
-{
-    int n;
-
-    // Get user input for the upper limit
-    printf("Enter the upper limit (n): ");
-    scanf("%d", &n);
-
-    // Call the searchPrimesRecursive function
-    printf("Prime numbers up to %d: ", n);
-    searchPrimesRecursive(n, 2);
-
-    printf("\n");
-
-    return 0;
-}
+#endif

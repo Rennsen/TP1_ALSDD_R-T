@@ -1,20 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
 // Linked List Abstract Machine Library
-#ifndef AbstrMachSingly_H
-#define AbstrMachSingly_H
+#ifndef QST4LIB_H
+#define QST4LIB_H
 
 #include <stdlib.h>
 #include <stdio.h>
 
+typedef struct LinkedList LinkedList;
 typedef struct cell
 {
     int value;
     bool deleted;
     struct cell *next;
-    int rangeIndex; // New field to keep track of the range index
+    LinkedList *sublist;
 } cell;
 
 void allocate_cell(cell **p);
@@ -23,7 +20,6 @@ int value(cell *p);
 cell *next(cell *p);
 void ass_val(cell *p, int v);
 void ass_adr(cell *p, cell *q);
-void ass_range_index(cell *p, int index); // New function to assign range index
 
 void allocate_cell(cell **p)
 {
@@ -82,29 +78,13 @@ void ass_adr(cell *p, cell *q)
     }
 }
 
-void ass_range_index(cell *p, int index)
-{
-    if (p != NULL)
-    {
-        p->rangeIndex = index;
-    }
-}
-
-#endif
-
 // Linked List Implementation
-typedef struct LinkedList
+struct LinkedList
 {
     cell *head;
     size_t size;
-} LinkedList;
+};
 
-LinkedList *createLinkedList();
-void destroyLinkedList(LinkedList *list);
-void addToLinkedList(LinkedList *list, int element);
-void removeMultiplesLL(LinkedList *list, int multiple);
-
-// ... (implementation of LinkedList functions)
 LinkedList *createLinkedList()
 {
     LinkedList *list = (LinkedList *)malloc(sizeof(LinkedList));
@@ -155,7 +135,6 @@ void removeMultiplesLL(LinkedList *list, int multiple)
     }
 }
 
-// Prime Generation
 void generatePrimesLinkedList(LinkedList *primes, int n)
 {
     addToLinkedList(primes, 2); // Add 2 to the linked list
@@ -176,85 +155,61 @@ void generatePrimesLinkedList(LinkedList *primes, int n)
         current = next(current);
     }
 }
-// ... (implementation of generatePrimesLinkedList)
 
-// Index by Range
-void indexByRange(LinkedList *primes, int range)
+void createInitialListLinkedList(LinkedList *list, int n)
 {
-    cell *current = primes->head;
-    int index = 1;
-    int rangeCount = 1;
-
-    while (current != NULL)
+    for (int i = 2; i <= n; i++)
     {
-        if (!current->deleted)
-        {
-            ass_range_index(current, rangeCount);
-            if (index % range == 0)
-            {
-                rangeCount++;
-            }
-            index++;
-        }
-        current = next(current);
+        addToLinkedList(list, i);
     }
 }
 
-// Display by Range
-void displayByRange(LinkedList *primes, int range)
+// Function to create a sublist
+LinkedList *createSublist()
 {
-    cell *current = primes->head;
-    int currentRange = 1;
-
-    while (current != NULL)
-    {
-        if (!current->deleted && current->rangeIndex == currentRange)
-        {
-            printf("%d|", value(current));
-        }
-        else if (!current->deleted && current->rangeIndex > currentRange)
-        {
-            printf("  ||  ");
-            currentRange = current->rangeIndex;
-            printf("|%d|", value(current));
-        }
-        current = next(current);
-    }
-    printf("\n");
+    return createLinkedList();
 }
 
-// Main Test
-int main()
+// Function to add an element to a sublist
+void addSublistElement(LinkedList *sublist, int value)
 {
-    int n, range;
-
-    printf("Enter the upper bound (n): ");
-    scanf("%d", &n);
-    printf("Enter the range: ");
-    scanf("%d", &range);
-
-    // Create and display initial list using linked list
-    LinkedList *primesList = createLinkedList();
-    // Generate primes using linked list
-    generatePrimesLinkedList(primesList, n);
-    cell *current;
-    current = primesList->head;
-    while (current != NULL)
-    {
-        if (!current->deleted)
-        {
-            printf("%d ", value(current));
-        }
-        current = next(current);
-    }
-    printf("\n");
-    // Index by range
-    indexByRange(primesList, range);
-
-    // Display by range
-    printf("Prime Numbers by Range (%d): |", range);
-    displayByRange(primesList, range);
-
-    destroyLinkedList(primesList);
-    return 0;
+    addToLinkedList(sublist, value);
 }
+
+// Function to destroy a sublist
+void destroySublist(LinkedList *sublist)
+{
+    destroyLinkedList(sublist);
+}
+
+// Prime Factorization
+void factorizeNumber(int number, LinkedList *primeList, LinkedList *initialList)
+{
+    LinkedList *primeFactorsList = createLinkedList();
+    int num = number;
+
+    cell *currentPrime = primeList->head;
+    while (currentPrime != NULL && num > 1)
+    {
+        int prime = value(currentPrime);
+        while (num % prime == 0)
+        {
+            addToLinkedList(primeFactorsList, prime);
+            num /= prime;
+        }
+        currentPrime = next(currentPrime);
+    }
+
+    cell *initialListCell = initialList->head;
+    while (initialListCell != NULL)
+    {
+        if (value(initialListCell) == number)
+        {
+            initialListCell->sublist = primeFactorsList; // Assign sublist to the cell
+            break;
+        }
+        initialListCell = next(initialListCell);
+    }
+}
+
+#endif
