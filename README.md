@@ -29,7 +29,7 @@ The project is organized into several components:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/username/repository.git
+   git clone https://github.com/Rennsen/TP1_ALSDD_R-T.git
    ```
 
 2. Open the project in Code::Blocks.
