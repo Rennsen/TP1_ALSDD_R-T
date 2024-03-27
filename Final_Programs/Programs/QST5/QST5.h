@@ -1,11 +1,83 @@
 // Linked List Abstract Machine Library
-#ifndef QST4LIB_H
-#define QST4LIB_H
+#ifndef QST5LIB_H
+#define QST5LIB_H
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "AbstractMachineSingly.h"
+#include <stdbool.h>
 
+typedef struct LinkedList LinkedList;
+typedef struct cell
+{
+    int value;
+    bool deleted;
+    struct cell *next;
+    LinkedList *sublist;
+} cell;
+
+void allocate_cell(cell **p);
+void free_cell(cell *head);
+int value(cell *p);
+cell *next(cell *p);
+void ass_val(cell *p, int v);
+void ass_adr(cell *p, cell *q);
+
+void allocate_cell(cell **p)
+{
+    *p = (cell *)malloc(sizeof(cell));
+}
+
+void free_cell(cell *head)
+{
+    while (head != NULL)
+    {
+        cell *p = head;
+        head = head->next;
+        free(p);
+    }
+}
+
+int value(cell *p)
+{
+    if (p != NULL)
+    {
+        return p->value;
+    }
+    else
+    {
+        perror("Error.");
+        return -1;
+    }
+}
+
+cell *next(cell *p)
+{
+    if (p != NULL)
+    {
+        return p->next;
+    }
+    else
+    {
+        perror("Error.");
+        return NULL;
+    }
+}
+
+void ass_val(cell *p, int v)
+{
+    if (p != NULL)
+    {
+        p->value = v;
+    }
+}
+
+void ass_adr(cell *p, cell *q)
+{
+    if (p != NULL)
+    {
+        p->next = q;
+    }
+}
 
 // Linked List Implementation
 struct LinkedList
@@ -112,21 +184,16 @@ void destroySublist(LinkedList *sublist)
 }
 
 // Prime Factorization
-void factorizeNumber(int number, LinkedList *primeList, LinkedList *initialList)
+void factorizeNumber(int number, LinkedList *initialList)
 {
-    LinkedList *primeFactorsList = createLinkedList();
-    int num = number;
+    LinkedList *factorsList = createLinkedList();
 
-    cell *currentPrime = primeList->head;
-    while (currentPrime != NULL && num > 1)
+    for (int i = 2; i <= number; i++)
     {
-        int prime = value(currentPrime);
-        while (num % prime == 0)
+        if (number % i == 0)
         {
-            addToLinkedList(primeFactorsList, prime);
-            num /= prime;
+            addToLinkedList(factorsList, i);
         }
-        currentPrime = next(currentPrime);
     }
 
     cell *initialListCell = initialList->head;
@@ -134,11 +201,23 @@ void factorizeNumber(int number, LinkedList *primeList, LinkedList *initialList)
     {
         if (value(initialListCell) == number)
         {
-            initialListCell->sublist = primeFactorsList; // Assign sublist to the cell
+            initialListCell->sublist = factorsList; // Assign sublist to the cell
             break;
         }
         initialListCell = next(initialListCell);
     }
 }
+
+void printlist(LinkedList *list)
+{
+    cell *current = list->head;
+    while (current != NULL)
+    {
+        printf("%d ", current->value);
+        current = current->next;
+    }
+    printf("\n");
+}
+
 
 #endif
