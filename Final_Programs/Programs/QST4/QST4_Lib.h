@@ -141,4 +141,36 @@ void factorizeNumber(int number, LinkedList *primeList, LinkedList *initialList)
     }
 }
 
+void printFactorisation(cell * head){
+     cell *current = head;
+    while (current != NULL)
+    {
+        printf("%d: ", value(current));
+        LinkedList *sublist = current->sublist;
+        cell *sublist_current = sublist->head;
+        while (sublist_current != NULL)
+        {
+            int count = 0;
+            int prime = value(sublist_current);
+            while (sublist_current != NULL && value(sublist_current) == prime)
+            {
+                count++;
+                sublist_current = next(sublist_current);
+            }
+            printf("%d", prime);
+            if (count > 1)
+            {
+                printf("^(%d)", count);
+            }
+            if (sublist_current != NULL)
+            {
+                printf(" * ");
+            }
+        }
+        printf("\n");
+        current = next(current);
+    }
+}
+
+
 #endif

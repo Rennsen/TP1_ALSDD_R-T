@@ -219,5 +219,72 @@ void printlist(LinkedList *list)
     printf("\n");
 }
 
+void printList(cell* head) {
+    cell* current = head;
+    while (current != NULL) {
+        printf("%d ", current->value);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+
+
+// Function to check if two numbers are coprime
+bool areCoprime(LinkedList *divisors1, LinkedList *divisors2)
+{
+    cell *current1 = divisors1->head;
+    cell *current2 = divisors2->head;
+
+    while (current1 != NULL && current2 != NULL)
+    {
+        int divisor1 = value(current1);
+        int divisor2 = value(current2);
+
+        if (divisor1 == divisor2)
+        {
+            return false; // Common divisor found, not coprime
+        }
+        else if (divisor1 < divisor2)
+        {
+            current1 = next(current1);
+        }
+        else
+        {
+            current2 = next(current2);
+        }
+    }
+
+    return true; // No common divisor found, coprime
+}
+
+// Function to check if two numbers are coprime based on their divisors sublist
+bool areCoprimeLinkedList(LinkedList *sublist1, LinkedList *sublist2)
+{
+    cell *current1 = sublist1->head;
+    cell *current2 = sublist2->head;
+
+    while (current1 != NULL && current2 != NULL)
+    {
+        int divisor1 = value(current1);
+        int divisor2 = value(current2);
+
+        if (divisor1 == divisor2)
+        {
+            return false; // Common divisor found, not coprime
+        }
+        else if (divisor1 < divisor2)
+        {
+            current1 = next(current1);
+        }
+        else
+        {
+            current2 = next(current2);
+        }
+    }
+
+    return true; // No common divisor found, coprime
+}
+
 
 #endif

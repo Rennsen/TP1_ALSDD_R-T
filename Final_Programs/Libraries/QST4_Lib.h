@@ -212,4 +212,13 @@ void factorizeNumber(int number, LinkedList *primeList, LinkedList *initialList)
     }
 }
 
+void printList(cell* head) {
+    cell* current = head;
+    while (current != NULL) {
+        printf("%d ", current->value);
+        current = current->next;
+    }
+    printf("\n");
+}
+
 #endif

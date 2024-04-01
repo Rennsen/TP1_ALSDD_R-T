@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include "LinkedListLib.h"
 
+
+
 int main()
 {
     int n;
@@ -15,11 +17,12 @@ int main()
     createInitialListLinkedList(initialListLL, n);
     printf("Initial List (Linked List): ");
     cell *current = initialListLL->head;
-    while (current != NULL)
-    {
-        printf("%d ", value(current));
-        current = next(current);
-    }
+    printList(initialListLL->head);
+    // while (current != NULL)
+    // {
+    //     printf("%d ", value(current));
+    //     current = next(current);
+    // }
     printf("\n");
 
     // Generate primes using linked list
@@ -27,14 +30,15 @@ int main()
     generatePrimesLinkedList(linkedListPrimes, n);
     printf("Primes using Linked List: ");
     current = linkedListPrimes->head;
-    while (current != NULL)
-    {
-        if (!current->deleted)
-        {
-            printf("%d ", value(current));
-        }
-        current = next(current);
-    }
+    printListLogic(linkedListPrimes->head);
+    // while (current != NULL)
+    // {
+    //     if (!current->deleted)
+    //     {
+    //         printf("%d ", value(current));
+    //     }
+    //     current = next(current);
+    // }
     printf("\n");
 
     destroyLinkedList(linkedListPrimes);

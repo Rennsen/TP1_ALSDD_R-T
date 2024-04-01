@@ -217,4 +217,13 @@ void displayByRange(LinkedList *primes, int range)
     printf("\n");
 }
 
+void printList(cell* head) {
+    cell* current = head;
+    while (current != NULL) {
+        printf("%d ", current->value);
+        current = current->next;
+    }
+    printf("\n");
+}
+
 #endif

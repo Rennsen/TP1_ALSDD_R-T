@@ -34,4 +34,5 @@ void searchPrimesRecursive(int n, int current)
     }
 }
 
+
 #endif
