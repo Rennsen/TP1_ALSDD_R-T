@@ -27,8 +27,6 @@ int main()
         current = next(current);
     }
 
-
-
     printf("this is the first integer list :");
     printlist(initialListLL);
     cell *current1 = initialListLL->head;
@@ -39,7 +37,7 @@ int main()
         LinkedList *sublist1 = current1->sublist;
         if (number1 != 1)
         {
-            cell *current2 = initialListLL->head;
+            cell *current2 = next(current1);
             while (current2 != NULL)
             {
                 int number2 = value(current2);
@@ -61,4 +59,10 @@ int main()
     printf("\n");
     printf("1 is co-prime with all the integers in the list.\n");
     printf("Total coprime pairs involving 1: %d\n", count);
+
+    // Destroy linked lists to free memory
+    destroyLinkedList(initialListLL);
+    destroyLinkedList(linkedListPrimes);
+
+    return 0;
 }

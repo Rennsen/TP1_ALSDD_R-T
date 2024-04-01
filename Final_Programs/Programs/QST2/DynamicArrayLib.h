@@ -18,7 +18,10 @@ int getValue(DynArrMachine *dam, size_t index);
 void setValue(DynArrMachine *dam, size_t index, int value);
 void expandCapacity(DynArrMachine *dam);
 void addElement(DynArrMachine *dam, int value);
+void printDynamicArray(DynArrMachine *array);
 void removeMultiplesARR(DynArrMachine *dam, int multiple);
+void generatePrimesDynamicArray(DynArrMachine *primes, int n);
+void createInitialListDynamicArray(DynArrMachine *arr, int n);
 
 void initDynArray(DynArrMachine **dam, size_t initialCapacity)
 {
@@ -71,6 +74,17 @@ void addElement(DynArrMachine *dam, int value)
     dam->arr[dam->size] = value;
     dam->deleted[dam->size] = false;
     dam->size++;
+}
+
+void printDynamicArray(DynArrMachine *array)
+{
+    for (size_t i = 0; i < array->size; ++i)
+    {
+        if (!array->deleted[i])
+        {
+            printf("%d ", getValue(array, i));
+        }
+    }
 }
 
 void removeMultiplesARR(DynArrMachine *dam, int multiple)

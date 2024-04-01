@@ -26,13 +26,7 @@ int main()
     initDynArray(&dynamicPrimes, 10);
     generatePrimesDynamicArray(dynamicPrimes, n);
     printf("Primes using Dynamic Array: ");
-    for (size_t i = 0; i < dynamicPrimes->size; ++i)
-    {
-        if (!dynamicPrimes->deleted[i])
-        {
-            printf("%d ", getValue(dynamicPrimes, i));
-        }
-    }
+    printDynamicArray(dynamicPrimes);
     printf("\n");
     freeDynArray(dynamicPrimes);
     return 0;
