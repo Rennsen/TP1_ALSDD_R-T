@@ -265,3 +265,14 @@ bool areCoPrime(int a, int b)
 {
     return gcd(a, b) == 1;
 }
+
+void printList(cell* head) {
+    cell* current = head;
+    while (current != NULL) {
+        printf("%d ", current->value);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+

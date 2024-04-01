@@ -162,4 +162,26 @@ void createInitialListLinkedList(LinkedList *list, int n)
     }
 }
 
+void printListLogic(cell* head) {
+    cell *current = head;
+    while (current != NULL)
+    {
+        if (!current->deleted)
+        {
+            printf("%d ", value(current));
+        }
+        current = next(current);
+    }
+}
+
+
+void printList(cell* head) {
+    cell* current = head;
+    while (current != NULL) {
+        printf("%d ", current->value);
+        current = current->next;
+    }
+}
+
+
 #endif

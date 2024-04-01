@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "QST1_Lib.h"
+#include "AbstractMachineSingly.h"
 
 int main()
 {

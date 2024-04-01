@@ -3,6 +3,11 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "AbstractMachineSingly.h"
+
+
+// the main research algorithm
+
 
 // function that checks whether a number is prime or not
 int isPrime(int num, int divisor)

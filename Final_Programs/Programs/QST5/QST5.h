@@ -1,16 +1,18 @@
 // Linked List Abstract Machine Library
-#ifndef QST3LIB_H
-#define QST3LIB_H
+#ifndef QST5LIB_H
+#define QST5LIB_H
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
+typedef struct LinkedList LinkedList;
 typedef struct cell
 {
     int value;
     bool deleted;
     struct cell *next;
-    int rangeIndex; // New field to keep track of the range index
+    LinkedList *sublist;
 } cell;
 
 void allocate_cell(cell **p);
@@ -19,7 +21,6 @@ int value(cell *p);
 cell *next(cell *p);
 void ass_val(cell *p, int v);
 void ass_adr(cell *p, cell *q);
-void ass_range_index(cell *p, int index); // New function to assign range index
 
 void allocate_cell(cell **p)
 {
@@ -78,27 +79,13 @@ void ass_adr(cell *p, cell *q)
     }
 }
 
-void ass_range_index(cell *p, int index)
-{
-    if (p != NULL)
-    {
-        p->rangeIndex = index;
-    }
-}
-
 // Linked List Implementation
-typedef struct LinkedList
+struct LinkedList
 {
     cell *head;
     size_t size;
-} LinkedList;
+};
 
-LinkedList *createLinkedList();
-void destroyLinkedList(LinkedList *list);
-void addToLinkedList(LinkedList *list, int element);
-void removeMultiplesLL(LinkedList *list, int multiple);
-
-// ... (implementation of LinkedList functions)
 LinkedList *createLinkedList()
 {
     LinkedList *list = (LinkedList *)malloc(sizeof(LinkedList));
@@ -149,7 +136,6 @@ void removeMultiplesLL(LinkedList *list, int multiple)
     }
 }
 
-// Prime Generation
 void generatePrimesLinkedList(LinkedList *primes, int n)
 {
     addToLinkedList(primes, 2); // Add 2 to the linked list
@@ -170,49 +156,65 @@ void generatePrimesLinkedList(LinkedList *primes, int n)
         current = next(current);
     }
 }
-// ... (implementation of generatePrimesLinkedList)
 
-// Index by Range
-void indexByRange(LinkedList *primes, int range)
+void createInitialListLinkedList(LinkedList *list, int n)
 {
-    cell *current = primes->head;
-    int index = 1;
-    int rangeCount = 1;
-
-    while (current != NULL)
+    for (int i = 2; i <= n; i++)
     {
-        if (!current->deleted)
-        {
-            ass_range_index(current, rangeCount);
-            if (index % range == 0)
-            {
-                rangeCount++;
-            }
-            index++;
-        }
-        current = next(current);
+        addToLinkedList(list, i);
     }
 }
 
-// Display by Range
-void displayByRange(LinkedList *primes, int range)
+// Function to create a sublist
+LinkedList *createSublist()
 {
-    cell *current = primes->head;
-    int currentRange = 1;
+    return createLinkedList();
+}
 
+// Function to add an element to a sublist
+void addSublistElement(LinkedList *sublist, int value)
+{
+    addToLinkedList(sublist, value);
+}
+
+// Function to destroy a sublist
+void destroySublist(LinkedList *sublist)
+{
+    destroyLinkedList(sublist);
+}
+
+// Prime Factorization
+void factorizeNumber(int number, LinkedList *initialList)
+{
+    LinkedList *factorsList = createLinkedList();
+
+    for (int i = 2; i <= number; i++)
+    {
+        if (number % i == 0)
+        {
+            addToLinkedList(factorsList, i);
+        }
+    }
+
+    cell *initialListCell = initialList->head;
+    while (initialListCell != NULL)
+    {
+        if (value(initialListCell) == number)
+        {
+            initialListCell->sublist = factorsList; // Assign sublist to the cell
+            break;
+        }
+        initialListCell = next(initialListCell);
+    }
+}
+
+void printlist(LinkedList *list)
+{
+    cell *current = list->head;
     while (current != NULL)
     {
-        if (!current->deleted && current->rangeIndex == currentRange)
-        {
-            printf("%d|", value(current));
-        }
-        else if (!current->deleted && current->rangeIndex > currentRange)
-        {
-            printf("  ||  ");
-            currentRange = current->rangeIndex;
-            printf("|%d|", value(current));
-        }
-        current = next(current);
+        printf("%d ", current->value);
+        current = current->next;
     }
     printf("\n");
 }
@@ -225,5 +227,64 @@ void printList(cell* head) {
     }
     printf("\n");
 }
+
+
+
+// Function to check if two numbers are coprime
+bool areCoprime(LinkedList *divisors1, LinkedList *divisors2)
+{
+    cell *current1 = divisors1->head;
+    cell *current2 = divisors2->head;
+
+    while (current1 != NULL && current2 != NULL)
+    {
+        int divisor1 = value(current1);
+        int divisor2 = value(current2);
+
+        if (divisor1 == divisor2)
+        {
+            return false; // Common divisor found, not coprime
+        }
+        else if (divisor1 < divisor2)
+        {
+            current1 = next(current1);
+        }
+        else
+        {
+            current2 = next(current2);
+        }
+    }
+
+    return true; // No common divisor found, coprime
+}
+
+// Function to check if two numbers are coprime based on their divisors sublist
+bool areCoprimeLinkedList(LinkedList *sublist1, LinkedList *sublist2)
+{
+    cell *current1 = sublist1->head;
+    cell *current2 = sublist2->head;
+
+    while (current1 != NULL && current2 != NULL)
+    {
+        int divisor1 = value(current1);
+        int divisor2 = value(current2);
+
+        if (divisor1 == divisor2)
+        {
+            return false; // Common divisor found, not coprime
+        }
+        else if (divisor1 < divisor2)
+        {
+            current1 = next(current1);
+        }
+        else
+        {
+            current2 = next(current2);
+        }
+    }
+
+    return true; // No common divisor found, coprime
+}
+
 
 #endif

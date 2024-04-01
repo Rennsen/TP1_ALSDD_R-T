@@ -3,80 +3,12 @@
 #define QST3LIB_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <stdio.h>
+#include "AbstractMachineSingly.h"
 
-typedef struct cell
-{
-    int value;
-    bool deleted;
-    struct cell *next;
-    int rangeIndex; // New field to keep track of the range index
-} cell;
-
-void allocate_cell(cell **p);
-void free_cell(cell *head);
-int value(cell *p);
-cell *next(cell *p);
-void ass_val(cell *p, int v);
-void ass_adr(cell *p, cell *q);
 void ass_range_index(cell *p, int index); // New function to assign range index
 
-void allocate_cell(cell **p)
-{
-    *p = (cell *)malloc(sizeof(cell));
-}
-
-void free_cell(cell *head)
-{
-    while (head != NULL)
-    {
-        cell *p = head;
-        head = head->next;
-        free(p);
-    }
-}
-
-int value(cell *p)
-{
-    if (p != NULL)
-    {
-        return p->value;
-    }
-    else
-    {
-        perror("Error.");
-        return -1;
-    }
-}
-
-cell *next(cell *p)
-{
-    if (p != NULL)
-    {
-        return p->next;
-    }
-    else
-    {
-        perror("Error.");
-        return NULL;
-    }
-}
-
-void ass_val(cell *p, int v)
-{
-    if (p != NULL)
-    {
-        p->value = v;
-    }
-}
-
-void ass_adr(cell *p, cell *q)
-{
-    if (p != NULL)
-    {
-        p->next = q;
-    }
-}
 
 void ass_range_index(cell *p, int index)
 {
@@ -216,5 +148,28 @@ void displayByRange(LinkedList *primes, int range)
     }
     printf("\n");
 }
+
+void printListLogic(cell* head) {
+    cell *current = head;
+    while (current != NULL)
+    {
+        if (!current->deleted)
+        {
+            printf("%d ", value(current));
+        }
+        current = next(current);
+    }
+}
+
+
+void printList(cell* head) {
+    cell* current = head;
+    while (current != NULL) {
+        printf("%d ", current->value);
+        current = current->next;
+    }
+}
+
+
 
 #endif

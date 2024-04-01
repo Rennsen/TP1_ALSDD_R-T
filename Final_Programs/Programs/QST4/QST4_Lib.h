@@ -4,79 +4,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "AbstractMachineSingly.h"
 
-typedef struct LinkedList LinkedList;
-typedef struct cell
-{
-    int value;
-    bool deleted;
-    struct cell *next;
-    LinkedList *sublist;
-} cell;
-
-void allocate_cell(cell **p);
-void free_cell(cell *head);
-int value(cell *p);
-cell *next(cell *p);
-void ass_val(cell *p, int v);
-void ass_adr(cell *p, cell *q);
-
-void allocate_cell(cell **p)
-{
-    *p = (cell *)malloc(sizeof(cell));
-}
-
-void free_cell(cell *head)
-{
-    while (head != NULL)
-    {
-        cell *p = head;
-        head = head->next;
-        free(p);
-    }
-}
-
-int value(cell *p)
-{
-    if (p != NULL)
-    {
-        return p->value;
-    }
-    else
-    {
-        perror("Error.");
-        return -1;
-    }
-}
-
-cell *next(cell *p)
-{
-    if (p != NULL)
-    {
-        return p->next;
-    }
-    else
-    {
-        perror("Error.");
-        return NULL;
-    }
-}
-
-void ass_val(cell *p, int v)
-{
-    if (p != NULL)
-    {
-        p->value = v;
-    }
-}
-
-void ass_adr(cell *p, cell *q)
-{
-    if (p != NULL)
-    {
-        p->next = q;
-    }
-}
 
 // Linked List Implementation
 struct LinkedList
@@ -211,5 +140,37 @@ void factorizeNumber(int number, LinkedList *primeList, LinkedList *initialList)
         initialListCell = next(initialListCell);
     }
 }
+
+void printFactorisation(cell * head){
+     cell *current = head;
+    while (current != NULL)
+    {
+        printf("%d: ", value(current));
+        LinkedList *sublist = current->sublist;
+        cell *sublist_current = sublist->head;
+        while (sublist_current != NULL)
+        {
+            int count = 0;
+            int prime = value(sublist_current);
+            while (sublist_current != NULL && value(sublist_current) == prime)
+            {
+                count++;
+                sublist_current = next(sublist_current);
+            }
+            printf("%d", prime);
+            if (count > 1)
+            {
+                printf("^(%d)", count);
+            }
+            if (sublist_current != NULL)
+            {
+                printf(" * ");
+            }
+        }
+        printf("\n");
+        current = next(current);
+    }
+}
+
 
 #endif
