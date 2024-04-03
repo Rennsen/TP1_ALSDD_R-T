@@ -16,10 +16,7 @@ int main()
     initDynArray(&initialList, n - 1);
     createInitialListDynamicArray(initialList, n);
     printf("Initial List (Dynamic Array): ");
-    for (size_t i = 0; i < initialList->size; ++i)
-    {
-        printf("%d ", getValue(initialList, i));
-    }
+    printDynamicArray(initialList);
     printf("\n");
 
     // Generate primes using dynamic array
