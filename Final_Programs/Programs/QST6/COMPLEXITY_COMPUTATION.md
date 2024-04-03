@@ -108,7 +108,7 @@ This part provides a detailed analysis of the time complexity of the main progra
 
 2. **Initializing Initial List:**
    - Initializing pointer variable `initialList`: \( O(1) \)
-   - Initializing the initial list: [\ O(1) + O(n) \] = \( O(n) \)
+   - Initializing the initial list: [ O(1) + O(n) \] = \( O(n) \)
 
 3. **Printing Initial List:**
    - Printing the initial list: \( O(n) \)
