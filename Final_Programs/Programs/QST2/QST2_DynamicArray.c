@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "DynamicArrayLib.h"
-// Main Test
+#include "./Library/DynamicArrayLib.h"
+
+// Main
 int main()
 {
     int n;

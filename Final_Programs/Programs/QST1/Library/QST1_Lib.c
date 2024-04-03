@@ -1,13 +1,6 @@
-#ifndef QST1LIB_H
-#define QST1LIB_H
-
+#include "QST1_Lib.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "AbstractMachineSingly.h"
-
-
-// the main research algorithm
-
 
 // function that checks whether a number is prime or not
 int isPrime(int num, int divisor)
@@ -38,5 +31,3 @@ void searchPrimesRecursive(int n, int current)
         searchPrimesRecursive(n, current + 1);
     }
 }
-
-#endif

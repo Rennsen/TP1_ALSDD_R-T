@@ -1,26 +1,6 @@
-// Linked List Abstract Machine Library
-#ifndef QST5LIB_H
-#define QST5LIB_H
+#include "QST5_Lib.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-
-typedef struct LinkedList LinkedList;
-typedef struct cell
-{
-    int value;
-    bool deleted;
-    struct cell *next;
-    LinkedList *sublist;
-} cell;
-
-void allocate_cell(cell **p);
-void free_cell(cell *head);
-int value(cell *p);
-cell *next(cell *p);
-void ass_val(cell *p, int v);
-void ass_adr(cell *p, cell *q);
+// Abstract Machine Implementation
 
 void allocate_cell(cell **p)
 {
@@ -80,11 +60,6 @@ void ass_adr(cell *p, cell *q)
 }
 
 // Linked List Implementation
-struct LinkedList
-{
-    cell *head;
-    size_t size;
-};
 
 LinkedList *createLinkedList()
 {
@@ -208,27 +183,16 @@ void factorizeNumber(int number, LinkedList *initialList)
     }
 }
 
-void printlist(LinkedList *list)
+void printList(LinkedList *list)
 {
     cell *current = list->head;
     while (current != NULL)
     {
-        printf("%d ", current->value);
-        current = current->next;
+        printf("%d ", value(current));
+        current = next(current);
     }
     printf("\n");
 }
-
-void printList(cell* head) {
-    cell* current = head;
-    while (current != NULL) {
-        printf("%d ", current->value);
-        current = current->next;
-    }
-    printf("\n");
-}
-
-
 
 // Function to check if two numbers are coprime
 bool areCoprime(LinkedList *divisors1, LinkedList *divisors2)
@@ -286,5 +250,34 @@ bool areCoprimeLinkedList(LinkedList *sublist1, LinkedList *sublist2)
     return true; // No common divisor found, coprime
 }
 
-
-#endif
+// Module to print coprime pairs
+void printCoprimePairs(LinkedList *list, int n)
+{
+    cell *current1 = list->head;
+    while (current1 != NULL)
+    {
+        int number1 = value(current1);
+        LinkedList *sublist1 = current1->sublist;
+        if (number1 != 1)
+        {
+            cell *current2 = next(current1);
+            while (current2 != NULL)
+            {
+                int number2 = value(current2);
+                if (number1 != number2)
+                {
+                    LinkedList *sublist2 = current2->sublist;
+                    if (areCoprime(sublist1, sublist2))
+                    {
+                        printf("| (%d,%d) |", number1, number2);
+                    }
+                }
+                current2 = next(current2);
+            }
+        }
+        current1 = next(current1);
+    }
+    printf("\n");
+    printf("1 is co-prime with all the integers in the list.\n");
+    printf("Total coprime pairs involving 1: %d\n", n - 1);
+}

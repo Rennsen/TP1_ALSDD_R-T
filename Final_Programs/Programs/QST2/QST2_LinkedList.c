@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "LinkedListLib.h"
+#include "./Library/LinkedListLib.h"
 
-
-
+// Main
 int main()
 {
     int n;
@@ -18,11 +17,6 @@ int main()
     printf("Initial List (Linked List): ");
     cell *current = initialListLL->head;
     printList(initialListLL->head);
-    // while (current != NULL)
-    // {
-    //     printf("%d ", value(current));
-    //     current = next(current);
-    // }
     printf("\n");
 
     // Generate primes using linked list
@@ -31,14 +25,6 @@ int main()
     printf("Primes using Linked List: ");
     current = linkedListPrimes->head;
     printListLogic(linkedListPrimes->head);
-    // while (current != NULL)
-    // {
-    //     if (!current->deleted)
-    //     {
-    //         printf("%d ", value(current));
-    //     }
-    //     current = next(current);
-    // }
     printf("\n");
 
     destroyLinkedList(linkedListPrimes);

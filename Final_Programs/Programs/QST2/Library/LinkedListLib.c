@@ -1,23 +1,6 @@
-// Linked List Abstract Machine Library
-#ifndef AbstrMachSingly_H
-#define AbstrMachSingly_H
+#include "LinkedListLib.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-
-typedef struct cell
-{
-    int value;
-    bool deleted;
-    struct cell *next;
-} cell;
-
-void allocate_cell(cell **p);
-void free_cell(cell *head);
-int value(cell *p);
-cell *next(cell *p);
-void ass_val(cell *p, int v);
-void ass_adr(cell *p, cell *q);
+// Abstract Machine Implementation
 
 void allocate_cell(cell **p)
 {
@@ -77,11 +60,6 @@ void ass_adr(cell *p, cell *q)
 }
 
 // Linked List Implementation
-typedef struct LinkedList
-{
-    cell *head;
-    size_t size;
-}LinkedList;
 
 LinkedList *createLinkedList()
 {
@@ -162,7 +140,8 @@ void createInitialListLinkedList(LinkedList *list, int n)
     }
 }
 
-void printListLogic(cell* head) {
+void printListLogic(cell *head)
+{
     cell *current = head;
     while (current != NULL)
     {
@@ -174,14 +153,12 @@ void printListLogic(cell* head) {
     }
 }
 
-
-void printList(cell* head) {
-    cell* current = head;
-    while (current != NULL) {
+void printList(cell *head)
+{
+    cell *current = head;
+    while (current != NULL)
+    {
         printf("%d ", current->value);
         current = current->next;
     }
 }
-
-
-#endif

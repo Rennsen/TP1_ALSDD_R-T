@@ -21,7 +21,7 @@ int main()
     // Disclaimer Message
     printf("\nDISCLAIMER: THIS PROGRAM MEASURES EXECUTION TIME FOR DEMONSTRATION PURPOSES ONLY. ACCURATELY CALCULATING EXECUTION TIME MAY INVOLVE COMPLEXITIES SUCH AS I/O OVERHEADS, SYSTEM LOAD, AND OTHER FACTORS THAT THIS SIMPLE PROGRAM DOES NOT ACCOUNT FOR. USE PROFESSIONAL TOOLS AND TECHNIQUES FOR PRECISE MEASUREMENTS IN REAL-WORLD APPLICATIONS.\n\n");
 
-    printf("Enter the filename of the program (including extension, e.g., QST4.c): ");
+    printf("Enter the filename of the program (including extension and path, e.g., ../../QST4/QST4.c): ");
     scanf("%199s", filename); // Limiting input size to avoid buffer overflow
 
     // Get the frequency of the performance counter

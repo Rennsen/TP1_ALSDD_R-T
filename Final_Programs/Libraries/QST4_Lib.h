@@ -215,8 +215,8 @@ void factorizeNumber(int number, LinkedList *primeList, LinkedList *initialList)
 void printList(cell* head) {
     cell* current = head;
     while (current != NULL) {
-        printf("%d ", current->value);
-        current = current->next;
+        printf("%d ", value(current));
+        current = next(current);
     }
     printf("\n");
 }

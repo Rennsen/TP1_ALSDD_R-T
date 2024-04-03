@@ -1,15 +1,69 @@
-// Linked List Abstract Machine Library
-#ifndef QST3LIB_H
-#define QST3LIB_H
+#include "QST3_Lib.h"
 
-#include <stdlib.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include "AbstractMachineSingly.h"
+// abstract machine implementation
 
-void ass_range_index(cell *p, int index); // New function to assign range index
+void allocate_cell(cell **p)
+{ // allocate a cell
+    *p = (cell *)malloc(sizeof(cell));
+}
 
+void free_cell(cell *head)
+{ // free all the cells of the list
+    while (head != NULL)
+    {
+        cell *p = head;
+        head = head->next;
+        free(p);
+    }
+}
 
+int value(cell *p)
+{ // give the value of a cell
+    if (p != NULL)
+    {
+        return p->value;
+    }
+    else
+    {
+        // Handle NULL pointer case, return an error value.
+        perror("Error.");
+        return -1;
+    }
+}
+
+cell *next(cell *p)
+{ // give the next cell pointer
+    if (p != NULL)
+    {
+        return p->next;
+    }
+    else
+    {
+        // Handle NULL pointer case, return NULL.
+        perror("Error.");
+        return NULL;
+    }
+}
+
+void ass_val(cell *p, int v)
+{ // assign a value to the cell
+    if (p != NULL)
+    {
+        p->value = v;
+    }
+}
+
+void ass_adr(cell *p, cell *q)
+{ // assign a next value to the cell
+    if (p != NULL)
+    {
+        p->next = q;
+    }
+}
+
+// Logic Implementation
+
+// New function to assign range index
 void ass_range_index(cell *p, int index)
 {
     if (p != NULL)
@@ -17,19 +71,6 @@ void ass_range_index(cell *p, int index)
         p->rangeIndex = index;
     }
 }
-
-// Linked List Implementation
-typedef struct LinkedList
-{
-    cell *head;
-    size_t size;
-} LinkedList;
-
-LinkedList *createLinkedList();
-void destroyLinkedList(LinkedList *list);
-void addToLinkedList(LinkedList *list, int element);
-void removeMultiplesLL(LinkedList *list, int multiple);
-
 // ... (implementation of LinkedList functions)
 LinkedList *createLinkedList()
 {
@@ -149,7 +190,8 @@ void displayByRange(LinkedList *primes, int range)
     printf("\n");
 }
 
-void printListLogic(cell* head) {
+void printListLogic(cell *head)
+{
     cell *current = head;
     while (current != NULL)
     {
@@ -161,15 +203,12 @@ void printListLogic(cell* head) {
     }
 }
 
-
-void printList(cell* head) {
-    cell* current = head;
-    while (current != NULL) {
-        printf("%d ", current->value);
-        current = current->next;
+void printList(cell *head)
+{
+    cell *current = head;
+    while (current != NULL)
+    {
+        printf("%d ", value(current));
+        current = next(current);
     }
 }
-
-
-
-#endif
