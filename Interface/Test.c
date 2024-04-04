@@ -1,4 +1,4 @@
-#include "affichage.h"
+#include "Graphical_Display.h"
 #include <conio.h>
 
 int main(){
