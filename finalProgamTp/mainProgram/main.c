@@ -1,14 +1,14 @@
-#include "affichage.h"
+#include "graphicInterface.h"
 #include <conio.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "../Final_Programs/Programs/QST1/Library/QST1_Lib.h"
-#include "../Final_Programs/Programs/QST2/Library/DynamicArrayLib.h"
-#include "../Final_Programs/Programs/QST2/Library/LinkedListLib.h"
-#include "../Final_Programs/Programs/QST3/Library/QST3_LiB.h"
-#include "../Final_Programs/Programs/QST4/Library/QST4_LiB.h"
-#include "../Final_Programs/Programs/QST5/Library/QST5_Lib.h"
+#include "../Library_Implementation/QST1/Library/QST1_Lib.h"
+#include "../Library_Implementation/QST2/Library/DynamicArrayLib.h"
+#include "../Library_Implementation/QST2/Library/LinkedListLib.h"
+#include "../Library_Implementation/QST3/Library/QST3_LiB.h"
+#include "../Library_Implementation/QST4/Library/QST4_LiB.h"
+#include "../Library_Implementation/QST5/Library/QST5_Lib.h"
 
 void clearScreen() {
     system("cls");
@@ -17,7 +17,6 @@ void clearScreen() {
 int main() {
     int key;
     int n;
-
     Presentation();
     welcome();
     do {
@@ -55,9 +54,11 @@ int main() {
                 printf("\n");
                 break;
             case 2:
+
                 // Clear the screen
                 clearScreen();
-
+                int printCountD=0;
+                int countD=0;
                 // Display the user's selection
                 printf("You selected: Search for prime numbers using the Dynamic array\n\n");
 
@@ -71,11 +72,11 @@ int main() {
                 // Initialize a dynamic array for the initial list
                 DynArrMachine *initialList;
                 initDynArray(&initialList, n - 1);
-                createInitialListDynamicArray(initialList, n);
+                createInitialListDynamicArray(initialList, n,&countD);
 
                 // Display the initial list
                 printf("\nInitial List (Dynamic Array): ");
-                printDynamicArray(initialList);
+                printDynamicArray(initialList,&printCountD);
                 printf("\n");
 
                 // Initialize a dynamic array for the prime numbers
@@ -83,15 +84,19 @@ int main() {
                 initDynArray(&dynamicPrimes, 10);
 
                 // Generate prime numbers using Dynamic array
-                generatePrimesDynamicArray(dynamicPrimes, n);
+                generatePrimesDynamicArray(dynamicPrimes, n,&countD);
 
                 // Display the prime numbers using Dynamic array
                 printf("\nPrimes using Dynamic Array: ");
-                printDynamicArray(dynamicPrimes);
-
+                printDynamicArray(dynamicPrimes,&printCountD);
                 // Free the memory allocated for the dynamic array of prime numbers
                 freeDynArray(dynamicPrimes);
-
+                printf("\n\n");
+                printf("For the question 6 : \n");
+                printf("---------------------\n\n");
+                printf("here is the number of iterations is : %d",countD);
+                printf("\n\n");
+                printf("here is the total number of iterations with the printing modules : %d",countD+printCountD);
                 // Display a separator
                 printf("\n");
                 printf("\n");
@@ -102,7 +107,9 @@ int main() {
             case 3:
                 // Clear the screen
                 clearScreen();
-
+                int count;
+                int PrintCount=0;
+                count = 0;// initializing the number of iterations to 0
                 // Display the user's selection
                 printf("You selected: Search for the prime numbers using Linked Lists\n\n");
 
@@ -115,26 +122,32 @@ int main() {
 
                 // Create a linked list for the initial list
                 LinkedList_2 *initialListLL = createLinkedList_2();
-                createInitialListLinkedList_2(initialListLL, n);
+                createInitialListLinkedList_2(initialListLL, n ,&count);
 
                 // Display the initial list
                 printf("\nInitial List (Linked List): ");
-                printList_2(initialListLL->head);
+                printList_2(initialListLL->head,&count);
 
                 // Create a linked list for the prime numbers
                 LinkedList_2 *linkedListPrimes = createLinkedList_2();
 
                 // Generate prime numbers using Linked List
-                generatePrimesLinkedList_2(linkedListPrimes, n);
+                generatePrimesLinkedList_2(linkedListPrimes, n , &count);
 
                 // Display the prime numbers using Linked List
                 printf("\n");
                 printf("\nPrimes using Linked List: ");
-                printListLogic_2(linkedListPrimes->head);
-
+                printListLogic_2(linkedListPrimes->head,&PrintCount);
+                printf("\n\n");
+                printf("\n\n");
                 // Destroy the linked list of prime numbers to free memory
                 destroyLinkedList_2(linkedListPrimes);
-
+                printf("\n\n");
+                printf("For the question 6 : \n");
+                printf("---------------------\n\n");
+                printf("here is the number of iterations is : %d",count);
+                printf("\n\n");
+                printf("here is the total number of iterations with the printing modules : %d",count+PrintCount);
                 // Display a separator
                 printf("\n");
                 printf("\n");

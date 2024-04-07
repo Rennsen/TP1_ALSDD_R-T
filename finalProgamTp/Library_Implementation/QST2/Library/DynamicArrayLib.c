@@ -67,30 +67,33 @@ void addElement(DynArrMachine *dam, int value) {
 }
 
 // Prints the non-deleted elements of the dynamic array
-void printDynamicArray(DynArrMachine *array) {
+void printDynamicArray(DynArrMachine *array, int * count) {
     for (size_t i = 0; i < array->size; ++i) {
         if (!array->deleted[i]) {
             printf("| %d |", getValue(array, i));
         }
+        *count+=1;
     }
 }
 
 // Removes all multiples of the given number (except the number itself) from the dynamic array
-void removeMultiplesARR(DynArrMachine *dam, int multiple) {
+void removeMultiplesARR(DynArrMachine *dam, int multiple,int * count) {
     for (size_t i = 0; i < dam->size; ++i) {
         if (!dam->deleted[i] && dam->arr[i] % multiple == 0 && dam->arr[i] != multiple) {
             dam->deleted[i] = true;
+            *count+=1;
         }
     }
 }
 
 // Generates a dynamic array of prime numbers up to the given limit
-void generatePrimesDynamicArray(DynArrMachine *primes, int n) {
+void generatePrimesDynamicArray(DynArrMachine *primes, int n , int * count ) {
     addElement(primes, 2); // Add 2 to the dynamic array
 
     // Add all odd numbers from 3 to n
     for (int i = 3; i <= n; i += 2) {
         addElement(primes, i);
+        *count+=1;
     }
 
     // Remove all multiples of each prime number from the array
@@ -99,13 +102,16 @@ void generatePrimesDynamicArray(DynArrMachine *primes, int n) {
         if (currentPrime * currentPrime > n) {
             break;
         }
-        removeMultiplesARR(primes, currentPrime);
+        removeMultiplesARR(primes, currentPrime,count);
+        *count+=1;
     }
 }
 
 // Creates a dynamic array of numbers from 2 to n
-void createInitialListDynamicArray(DynArrMachine *arr, int n) {
+void createInitialListDynamicArray(DynArrMachine *arr, int n, int * count ) {
     for (int i = 2; i <= n; i++) {
         addElement(arr, i);
+        *count+=1;
+
     }
 }
