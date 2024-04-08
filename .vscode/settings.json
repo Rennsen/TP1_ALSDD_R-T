@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "*.ejs": "html",
-        "qst5_lib.h": "c",
-        "qst4_lib.h": "c",
-        "qst3_lib.h": "c",
-        "dynamicarraylib.h": "c"
-    }
-}

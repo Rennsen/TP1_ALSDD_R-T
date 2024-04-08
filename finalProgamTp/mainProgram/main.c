@@ -273,8 +273,9 @@ int main() {
                 clearScreen();
 
                 // Display the user's selection
-                printf("You selected: Expressing each number of the initial list as a product of prime numbers\n");
+                printf("You selected: Expressing each number of the initial list as a product of prime numbers\n\n");
 
+                PrimeProduct();
                 // Display a prompt for the upper bound
                 printf("\n");
                 while (1) {
