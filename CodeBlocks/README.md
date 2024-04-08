@@ -44,6 +44,7 @@ The project is organized into several components:
 **For that reason, it is advised to remove the QST6 folder when operating on the main program and only add it to inspect the complexity computation.**
 **As for the iteration counter, it is included in QST2 as expected and will print the number of iterations with respect to 'n'.**
 
+## HERE IS THE LINK FOR THE REPO/ https://github.com/Rennsen/TP1_ALSDD_R-T.git
 ## Contributors
 
 - Rayan Derradji ([GitHub](https://github.com/Rennsen))
