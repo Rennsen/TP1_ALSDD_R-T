@@ -100,22 +100,25 @@ void destroyLinkedList_3(LinkedList_3 *list)
 
 void addToLinkedList_3(LinkedList_3 *list, int element)
 {
+     // Create a new cell
     cell_3 *newCell;
     allocate_cell_3(&newCell);
-    ass_val_3(newCell, element);
-    ass_deleted_3(newCell,false);
-    ass_adr_3(newCell, NULL);
+    ass_val_3(newCell, element);  // Set the value of the new cell to the given element
+    ass_deleted_3(newCell,false); // Mark the new cell as not deleted
+    ass_adr_3(newCell, NULL);  // Set the address of the new cell to NULL
     if (list->head == NULL)
     {
-        list->head = newCell;
+        list->head = newCell; // If the list is empty, set the head of the list to be the new cell we created
     }
     else
     {
+        // Otherwise, find the last cell in the list
         cell_3 *current = list->head;
         while (next_3(current) != NULL)
         {
             current = next_3(current);
         }
+        // Set the address of the last cell to be the new cell
         ass_adr_3(current, newCell);
     }
     list->size++;
@@ -123,71 +126,76 @@ void addToLinkedList_3(LinkedList_3 *list, int element)
 
 void removeMultiplesLL_3(LinkedList_3 *list, int multiple)
 {
-    cell_3 *current = list->head;
-    while (current != NULL)
+    cell_3 *current = list->head; // Start from the head of the list
+    while (current != NULL) // Iterate through the list
     {
+        // Check if the current cell is not deleted and its value is a multiple of the given number,
+        // and the value is not equal to the given number
         if (!deleted_3(current) && value_3(current) % multiple == 0 && value_3(current) != multiple)
         {
-            ass_deleted_3(current,true);
+            ass_deleted_3(current,true); // Mark the current cell as deleted
         }
-        current = next_3(current);
+        current = next_3(current); // Move to the next cell
     }
 }
+
 
 // Prime Generation
 void generatePrimesLinkedList_3(LinkedList_3 *primes, int n)
 {
     addToLinkedList_3(primes, 2); // Add 2 to the linked list
-    for (int i = 3; i <= n; i += 2)
+    for (int i = 3; i <= n; i += 2) // Iterate through odd numbers starting from 3 up to n adding by 2 to get only the odd numbers
     {
-        addToLinkedList_3(primes, i);
+        addToLinkedList_3(primes, i); // Add the current odd number which is i to the linked list
     }
 
-    cell_3 *current = primes->head;
-    while (current != NULL)
+    cell_3 *current = primes->head; // Start from the head of the list
+    while (current != NULL) // Iterate through the list
     {
-        int currentPrime = value_3(current);
-        if (currentPrime * currentPrime > n)
+        int currentPrime = value_3(current); // Get the value of the current cell
+        if (currentPrime * currentPrime > n) // If the square of the current prime is greater than n, exit the loop
         {
             break;
         }
-        removeMultiplesLL_3(primes, currentPrime);
-        current = next_3(current);
+        removeMultiplesLL_3(primes, currentPrime); // Remove multiples of the current prime from the list
+        current = next_3(current); // Move to the next cell
     }
 }
 
+
 void printListLogic_3(cell_3 *head)
 {
-    cell_3 *current = head;
-    while (current != NULL)
+    cell_3 *current = head; // we set the variable current to be the head of the list
+    while (current != NULL) // we iterate through the list and we check if we are at the end of the list or not yet
     {
-        if (!deleted_3(current))
+        if (!deleted_3(current)) // if the field deleted if the cell current has the value true, then it's not a prime number so we don't print it, else we must print it because it is a prime number
         {
-            printf("%d ", value_3(current));
+            printf("| %d |", value_3(current));  // we print the value of the cell
         }
-        current = next_3(current);
+        current = next_3(current); // we move to the next cell
     }
 }
 
 
 // here ends the generating of the primeList and we start the implementation of the question 3
 void createAccessPoints_3(LinkedList_3 *primesList, int range) {
-    cell_3 *current = primesList->head;
-    AccessPoint_3 *accessPointHead = NULL;
-    AccessPoint_3 *accessPointTail = NULL;
-    int count = 0;
+    cell_3 *current = primesList->head; // Start from the head of the list
+    AccessPoint_3 *accessPointHead = NULL; // Initialize the access points of the list
+    AccessPoint_3 *accessPointTail = NULL; // Initialize the tail of the access points
+    int count = 0; // Initialize a counter for the current range
 
-    while (current != NULL) {
+    while (current != NULL) { // Loop through the list until the end
         // Skip over cells with the 'deleted' field set to true
         while (current != NULL && deleted_3(current)) {
-            current=next_3(current);
+            current = next_3(current);
         }
 
-        if (current == NULL) {
+        if (current == NULL) { // If we reach the end of the list, exit the loop
             break;
         }
 
-        if (count == 0) {
+        if (count == 0) { // If the counter is 0, start a new range
+            // Create a new access point and set its head
             AccessPoint_3 *newAP = (AccessPoint_3 *)malloc(sizeof(AccessPoint_3));
             newAP->head = current;
             newAP->next = NULL;
@@ -199,27 +207,28 @@ void createAccessPoints_3(LinkedList_3 *primesList, int range) {
             }
         }
 
-        count++;
+        count++; // Increment the counter for the current range
 
-        if (count == range) {
+        if (count == range) { // If we reach the specified range, set the tail of the current access point
             // Find the last non-deleted cell within the current range
             cell_3 *lastCell = current;
             while (next_3(lastCell) != NULL && !deleted_3(next_3(lastCell))) {
                 lastCell = next_3(lastCell);
             }
-            accessPointTail->tail = lastCell;
-            count = 0;
+            accessPointTail->tail = lastCell; // Set the tail of the current access point
+            count = 0; // Reset the counter for the next range
         }
 
-        current = next_3(current);
+        current = next_3(current); // Move to the next cell in the list
     }
 
-    if (accessPointTail != NULL) {
+    if (accessPointTail != NULL) { // If there is at least one access point, set the tail of the last access point to NULL
         accessPointTail->tail = NULL;
     }
 
-    primesList->accessPoints = accessPointHead;
-}  // let us don't consider the deleted cells in the accessPoint, so we don't add the
+    primesList->accessPoints = accessPointHead; // Set the access points of the list
+}
+
 
 void searchPrimesInInterval_3(LinkedList_3 *primesList, int start, int end)
 {
@@ -282,24 +291,25 @@ void searchPrimesInInterval_3(LinkedList_3 *primesList, int start, int end)
 
 void displayAccessPoints_3(LinkedList_3 *primesList)
 {
-    printf("Access Points:\n");
-    AccessPoint_3 *current = primesList->accessPoints;
-    int accessPointIndex = 1;
+    printf("Access Points:\n"); // Print a header for the access points
+    AccessPoint_3 *current = primesList->accessPoints; // Start from the first access point
+    int accessPointIndex = 1; // Initialize the access point index
 
-    while (current != NULL)
+    while (current != NULL) // Iterate through the access points
     {
+        // Print the index, head value, and tail value of the current access point
         printf("Access Point %d: Head = %d, Tail = %d\n", accessPointIndex, current->head->value, (current->tail ? current->tail->value : -1));
-        current = current->next; // the next for the accesspoints structure
-        accessPointIndex++;
+        current = current->next; // Move to the next access point
+        accessPointIndex++; // Increment the access point index
     }
 }
 
 void printList_3(cell_3 *head)
 {
-    cell_3 *current = head;
-    while (current != NULL)
+    cell_3 *current = head; // Start from the head of the list
+    while (current != NULL) // Iterate through the list
     {
-        printf("%d ", value_3(current));
-        current = next_3(current);
+        printf("%d ", value_3(current)); // Print the value of the current cell
+        current = next_3(current); // Move to the next cell
     }
 }

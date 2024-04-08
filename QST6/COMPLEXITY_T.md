@@ -128,10 +128,10 @@ In summary, the time complexities of the functions are:
     generatePrimesLinkedList_2(LinkedList_2 *primes, int n):
         This function generates a linked list of prime numbers up to the given limit.
         Time Complexity: O(n log log n), which is the time complexity of the Sieve of Eratosthenes algorithm used to generate prime numbers.
-    To prove this, let's go through the steps of the algorithm: a. The first step is to add 2 to the linked list, which takes O(1) time. b. The next step is to add all odd numbers from 3 to n to the linked list. This takes O(n/2) = O(n) time. c. The final step is to remove all multiples of each prime number from the list. This step is the same as the Sieve of Eratosthenes algorithm, which has a time complexity of O(n log log n). Therefore, the overall time complexity of generatePrimesLinkedList_2 is O(n log log n).
-    
-    
-    createInitialListLinkedList_2(LinkedList_2 *list, int n):
+        To prove this, let's go through the steps of the algorithm: a. The first step is to add 2 to the linked list, which takes O(1) time. b. The next step is to add all odd numbers from 3 to n to the linked list. This takes O(n/2) = O(n) time. c. The final step is to remove all multiples of each prime number from the list. This step is the same as the Sieve of Eratosthenes algorithm, which has a time complexity of O(n log log n). Therefore, the overall time complexity of generatePrimesLinkedList_2 is O(n log log n).
+        
+        
+        createInitialListLinkedList_2(LinkedList_2 *list, int n):
         This function creates a linked list of numbers from 2 to n.
         Time Complexity: O(n), as the function iterates through the range from 2 to n and adds each number to the linked list.
     printListLogic_2(cell_2 *head):

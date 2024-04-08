@@ -85,48 +85,75 @@ void destroyLinkedList_4(LinkedList_4 *list_4) {
 
 // Adds an element to the linked list
 void addToLinkedList_4(LinkedList_4 *list_4, int element_4) {
+    // Create a new cell for the element
     cell_4 *newCell_4;
-    allocate_cell_4(&newCell_4);
-    ass_val_4(newCell_4, element_4);
-    ass_deleted_4(newCell_4,false);
-    ass_adr_4(newCell_4, NULL);
+    allocate_cell_4(&newCell_4); // allocating memory for a new cell
+    ass_val_4(newCell_4, element_4); // Assign the value to the new cell
+    ass_deleted_4(newCell_4, false); // Mark the cell as not deleted
+    ass_adr_4(newCell_4, NULL); // Set the address of the next cell to NULL
+
+    // If the list is empty, set the new cell as the head of the list
     if (list_4->head_4 == NULL) {
         list_4->head_4 = newCell_4;
     } else {
+        // Otherwise, find the last cell in the list
         cell_4 *current_4 = list_4->head_4;
         while (next_4(current_4) != NULL) {
             current_4 = next_4(current_4);
         }
+        // Set the address of the last cell to the new cell
         ass_adr_4(current_4, newCell_4);
     }
+
+    // Increase the size of the list
     list_4->size_4++;
 }
 
 // Removes all multiples of a given number (except the number itself) from the linked list
 void removeMultiplesLL_4(LinkedList_4 *list_4, int multiple_4) {
+    // Start from the head of the list
     cell_4 *current_4 = list_4->head_4;
+
+    // Iterate through each cell in the list
     while (current_4 != NULL) {
+        // Check if the current cell is not deleted, its value is a multiple of 'multiple_4', and its value is not 'multiple_4' itself
         if (!deleted_4(current_4) && value_4(current_4) % multiple_4 == 0 && value_4(current_4) != multiple_4) {
+            // If the conditions are met, mark the cell as deleted
             current_4->deleted_4 = true;
         }
+        // Move to the next cell in the list
         current_4 = next_4(current_4);
     }
 }
 
 // Generates a linked list of prime numbers up to the given limit
 void generatePrimesLinkedList_4(LinkedList_4 *primes_4, int n_4) {
-    addToLinkedList_4(primes_4, 2); // Add 2 to the linked list
+    // Add the first prime number, 2, to the linked list
+    addToLinkedList_4(primes_4, 2);
+
+    // Iterate through odd numbers starting from 3 up to n
     for (int i_4 = 3; i_4 <= n_4; i_4 += 2) {
+        // Add each odd number to the linked list
         addToLinkedList_4(primes_4, i_4);
     }
 
+    // Start from the head of the list
     cell_4 *current_4 = primes_4->head_4;
+
+    // Iterate through each prime number in the list
     while (current_4 != NULL) {
+        // Get the value of the current prime number
         int currentPrime_4 = value_4(current_4);
+
+        // If the square of the current prime number is greater than n, exit the loop
         if (currentPrime_4 * currentPrime_4 > n_4) {
             break;
         }
+
+        // Remove multiples of the current prime number from the list
         removeMultiplesLL_4(primes_4, currentPrime_4);
+
+        // Move to the next prime number in the list
         current_4 = next_4(current_4);
     }
 }

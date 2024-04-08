@@ -93,13 +93,13 @@ int main() {
                 }
 
                 // Initialize a dynamic array for the initial list
-                DynArrMachine *initialList;
-                initDynArray(&initialList, n - 1);
-                createInitialListDynamicArray(initialList, n,&countD);
+                DynArrMachine *initialArr;
+                initDynArray(&initialArr, n - 1);
+                createInitialListDynamicArray(initialArr, n,&countD);
 
                 // Display the initial list
                 printf("\nInitial List (Dynamic Array): ");
-                printDynamicArray(initialList,&printCountD);
+                printDynamicArray(initialArr,&printCountD);
                 printf("\n");
 
                 // Initialize a dynamic array for the prime numbers
@@ -114,6 +114,7 @@ int main() {
                 printDynamicArray(dynamicPrimes,&printCountD);
                 // Free the memory allocated for the dynamic array of prime numbers
                 freeDynArray(dynamicPrimes);
+                freeDynArray(initialArr);
                 printf("\n\n");
                 printf("For the question 6 : \n");
                 printf("---------------------\n\n");
@@ -176,6 +177,7 @@ int main() {
                 printf("\n\n");
                 // Destroy the linked list of prime numbers to free memory
                 destroyLinkedList_2(linkedListPrimes);
+                destroyLinkedList_2(initialListLL);
                 printf("\n\n");
                 printf("For the question 6 : \n");
                 printf("---------------------\n\n");
@@ -258,7 +260,6 @@ int main() {
 
                 // Destroy the linked list of prime numbers to free memory
                 destroyLinkedList_3(primesList);
-
                 // Display a separator
                 printf("\n");
                 printf("\n");
