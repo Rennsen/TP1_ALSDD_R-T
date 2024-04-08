@@ -40,6 +40,10 @@ The project is organized into several components:
 
 5. Build and run the project to observe the output and performance metrics.
 
+**IMPORTANT NOTE: The folder QST6 contains the complexity computation file along with bonus C programs that are not asked for the TP.**
+**For that reason, it is advised to remove the QST6 folder when operating on the main program and only add it to inspect the complexity computation.**
+**As for the iteration counter, it is included in QST2 as expected and will print the number of iterations with respect to 'n'.**
+
 ## Contributors
 
 - Rayan Derradji ([GitHub](https://github.com/Rennsen))
