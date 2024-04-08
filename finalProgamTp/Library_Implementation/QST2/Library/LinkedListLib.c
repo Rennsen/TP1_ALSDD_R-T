@@ -164,8 +164,8 @@ void printListLogic_2(cell_2 *head,int *count) {
 void printList_2(cell_2 *head,int *count) {
     cell_2 *current = head;
     while (current != NULL) {
-        printf("| %d |", current->value);
-        current = current->next;
+        printf("| %d |", value_2(current));
+        current = next_2(current);
         *count+=1;
     }
 }

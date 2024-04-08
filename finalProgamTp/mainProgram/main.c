@@ -17,6 +17,7 @@ void clearScreen() {
 int main() {
     int key;
     int n;
+    char continueChoice;
     Presentation();
     welcome();
     do {
@@ -38,10 +39,20 @@ int main() {
                 SearchingPrimeAlgorithm();
 
                 // Prompt the user to enter the upper limit
-                printf("Enter the upper limit (n): ");
-                scanf("%d", &n);
                 printf("\n");
+                while (1) {
+                 printf("Enter the upper limit (n): ");
+                if (scanf("%d", &n) == 1) {
+                    // Input is a valid integer
+                    break;
+                } else {
+                    // Input is not a valid integer
+                    printf("Invalid input. Please enter an integer.\n");
 
+                    // Clear the input buffer
+                    while (getchar() != '\n');
+                }
+                }
                 // Display the prime numbers up to the entered upper limit
                 printf("Prime numbers up to %d: ", n);
                 searchPrimesRecursive(n, 2);
@@ -66,8 +77,20 @@ int main() {
                 PrimeSearchDynamicArray();
 
                 // Prompt the user to enter the upper bound
-                printf("Enter the upper bound (n): ");
-                scanf("%d", &n);
+                printf("\n");
+                while (1) {
+                 printf("Enter the upper limit (n): ");
+                if (scanf("%d", &n) == 1) {
+                    // Input is a valid integer
+                    break;
+                } else {
+                    // Input is not a valid integer
+                    printf("Invalid input. Please enter an integer.\n");
+
+                    // Clear the input buffer
+                    while (getchar() != '\n');
+                }
+                }
 
                 // Initialize a dynamic array for the initial list
                 DynArrMachine *initialList;
@@ -117,9 +140,20 @@ int main() {
                 PrimeSearchLinkedLists();
 
                 // Prompt the user to enter the upper bound
-                printf("Enter the upper bound (n): ");
-                scanf("%d", &n);
+                printf("\n");
+                while (1) {
+                 printf("Enter the upper limit (n): ");
+                if (scanf("%d", &n) == 1) {
+                    // Input is a valid integer
+                    break;
+                } else {
+                    // Input is not a valid integer
+                    printf("Invalid input. Please enter an integer.\n");
 
+                    // Clear the input buffer
+                    while (getchar() != '\n');
+                }
+                }
                 // Create a linked list for the initial list
                 LinkedList_2 *initialListLL = createLinkedList_2();
                 createInitialListLinkedList_2(initialListLL, n ,&count);
@@ -172,8 +206,20 @@ int main() {
                 int end;
 
                 // Prompt the user to enter the upper bound
-                printf("Enter the upper bound (n): ");
-                scanf("%d", &n);
+                printf("\n");
+                while (1) {
+                 printf("Enter the upper limit (n): ");
+                if (scanf("%d", &n) == 1) {
+                    // Input is a valid integer
+                    break;
+                } else {
+                    // Input is not a valid integer
+                    printf("Invalid input. Please enter an integer.\n");
+
+                    // Clear the input buffer
+                    while (getchar() != '\n');
+                }
+                }
                 printf("-------------------------");
                 printf("\n");
                 printf("\n");
@@ -229,8 +275,20 @@ int main() {
                 printf("You selected: Expressing each number of the initial list as a product of prime numbers\n");
 
                 // Display a prompt for the upper bound
-                printf("Enter the upper bound (n): ");
-                scanf("%d", &n);
+                printf("\n");
+                while (1) {
+                 printf("Enter the upper limit (n): ");
+                if (scanf("%d", &n) == 1) {
+                    // Input is a valid integer
+                    break;
+                } else {
+                    // Input is not a valid integer
+                    printf("Invalid input. Please enter an integer.\n");
+
+                    // Clear the input buffer
+                    while (getchar() != '\n');
+                }
+                }
 
                 // Create and display the initial list using linked list
                 LinkedList_4 *initialListLL_4 = createLinkedList_4();
@@ -276,8 +334,20 @@ int main() {
 
                 // Display a prompt for the upper bound
                 printf("\n");
-                printf("Enter the upper bound (n): ");
-                scanf("%d", &n);
+                printf("\n");
+                while (1) {
+                 printf("Enter the upper limit (n): ");
+                if (scanf("%d", &n) == 1) {
+                    // Input is a valid integer
+                    break;
+                } else {
+                    // Input is not a valid integer
+                    printf("Invalid input. Please enter an integer.\n");
+
+                    // Clear the input buffer
+                    while (getchar() != '\n');
+                }
+                }
 
                 // Create and display initial list using linked list
                 LinkedList_5 *initialListLL_5 = createLinkedList_5();
@@ -316,8 +386,17 @@ int main() {
                 break;
             case 0:
                 // Display a message indicating that the program is exiting
-                printf("EXITING THE PROGRAM...\n");
-
+                printf("\n\n\n");
+                printf("EXITING THE PROGRAM...\n\n\n");
+                printf("Do you want to continue and exit the program ? (Press 'Y' to continue): ");
+                scanf(" %c", &continueChoice);
+                 if (continueChoice == 'Y' || continueChoice =='y' ) {
+                    key = 0; // Set key to 0 to exit the do-while loop
+                }else{
+                    key=2;
+                }
+                // Clear the screen
+                clearScreen();
                 // Display separators and empty lines
                 printf("\n");
                 printf("\n");
@@ -333,23 +412,25 @@ int main() {
         }
         // Prompt the user to continue or exit the program
         printf("\n");
-        printf("Do you want to continue? (Press 'Y' to continue): ");
+        if(key!=0){    printf("hello world");
+            printf("Do you want to continue? (Press 'Y' to continue running the Program): ");
+            scanf(" %c", &continueChoice);
+
+        }
 
         // Read the user's choice
-        char continueChoice;
-        scanf(" %c", &continueChoice);
 
         // Clear the screen
         clearScreen();
         system('cls');
 
                 // Check if the user wants to exit the program
-            if (continueChoice != 'Y' && continueChoice !='y' ) {
-                key = 0; // Set key to 0 to exit the do-while loop
-            }
+        if (continueChoice != 'Y' && continueChoice !='y' ) {
+            key = 0; // Set key to 0 to exit the do-while loop
+        }
 
-            // Clear the screen
-            clearScreen();
+        // Clear the screen
+        clearScreen();
         } while (key != 0); // Continue looping if key is not 0
 
         // Display a farewell message or perform any necessary cleanup

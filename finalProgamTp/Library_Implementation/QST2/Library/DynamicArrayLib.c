@@ -112,6 +112,5 @@ void createInitialListDynamicArray(DynArrMachine *arr, int n, int * count ) {
     for (int i = 2; i <= n; i++) {
         addElement(arr, i);
         *count+=1;
-
     }
 }

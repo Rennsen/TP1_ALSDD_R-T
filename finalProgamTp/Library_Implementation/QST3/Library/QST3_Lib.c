@@ -289,7 +289,7 @@ void displayAccessPoints_3(LinkedList_3 *primesList)
     while (current != NULL)
     {
         printf("Access Point %d: Head = %d, Tail = %d\n", accessPointIndex, current->head->value, (current->tail ? current->tail->value : -1));
-        current = current->next;
+        current = current->next; // the next for the accesspoints structure
         accessPointIndex++;
     }
 }
@@ -303,4 +303,3 @@ void printList_3(cell_3 *head)
         current = next_3(current);
     }
 }
-

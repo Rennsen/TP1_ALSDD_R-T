@@ -53,7 +53,7 @@ void ass_val_5(cell_5 *p, int v)
     }
 }
 
-void ass_adr(cell_5 *p, cell_5 *q)
+void ass_adr_5(cell_5 *p, cell_5 *q)
 {
     if (p != NULL)
     {
@@ -101,7 +101,7 @@ void addToLinkedList_5(LinkedList_5 *list, int element)
     allocate_cell_5(&newCell);
     ass_val_5(newCell, element);
     newCell->deleted = false;
-    ass_adr(newCell, NULL);
+    ass_adr_5(newCell, NULL);
     if (list->head == NULL)
     {
         list->head = newCell;
@@ -113,7 +113,7 @@ void addToLinkedList_5(LinkedList_5 *list, int element)
         {
             current = next_5(current);
         }
-        ass_adr(current, newCell);
+        ass_adr_5(current, newCell);
     }
     list->size++;
 }

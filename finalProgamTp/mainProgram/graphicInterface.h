@@ -204,8 +204,6 @@ void MENU (int *ch)
                     while (getchar() != '\n');
                 }
              }
-
-    printf("You entered: %d\n", ch);
 }
 
 void SearchingPrimeAlgorithm()
