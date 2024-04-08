@@ -1,14 +1,15 @@
 
-
 #include "QST5_Lib.h"
 
-// Abstract Machine Implementation
+// abstract machine for the linked list
 
+// Allocates memory for a cell_5 struct
 void allocate_cell_5(cell_5 **p)
 {
     *p = (cell_5 *)malloc(sizeof(cell_5));
 }
 
+// Frees the memory used by a linked list of cell_5 structs
 void free_cell_5(cell_5 *head)
 {
     while (head != NULL)
@@ -19,6 +20,7 @@ void free_cell_5(cell_5 *head)
     }
 }
 
+// Returns the value of a cell_5 struct
 int value_5(cell_5 *p)
 {
     if (p != NULL)
@@ -27,11 +29,13 @@ int value_5(cell_5 *p)
     }
     else
     {
+        // Handle NULL pointer case, return an error value.
         perror("Error.");
         return -1;
     }
 }
 
+// Returns the next cell_5 struct in the linked list
 cell_5 *next_5(cell_5 *p)
 {
     if (p != NULL)
@@ -40,11 +44,13 @@ cell_5 *next_5(cell_5 *p)
     }
     else
     {
+        // Handle NULL pointer case, return NULL.
         perror("Error.");
         return NULL;
     }
 }
 
+// Sets the value of a cell_5 struct
 void ass_val_5(cell_5 *p, int v)
 {
     if (p != NULL)
@@ -53,6 +59,7 @@ void ass_val_5(cell_5 *p, int v)
     }
 }
 
+// Sets the next pointer of a cell_5 struct
 void ass_adr_5(cell_5 *p, cell_5 *q)
 {
     if (p != NULL)
@@ -91,32 +98,41 @@ LinkedList_5 *createLinkedList_5()
 
 void destroyLinkedList_5(LinkedList_5 *list)
 {
-    free_cell_5(list->head);
-    free(list);
+    free_cell_5(list->head); // we destroy the head
+    free(list); // the do every cell
 }
 
+// adding an element to the list
 void addToLinkedList_5(LinkedList_5 *list, int element)
 {
+    // Create a new cell for the element
     cell_5 *newCell;
-    allocate_cell_5(&newCell);
-    ass_val_5(newCell, element);
-    newCell->deleted = false;
-    ass_adr_5(newCell, NULL);
+    allocate_cell_5(&newCell); // Allocate memory for the new cell
+    ass_val_5(newCell, element); // Assign the value to the new cell
+    newCell->deleted = false; // Mark the cell as not deleted
+    ass_adr_5(newCell, NULL); // Set the address of the next cell to NULL
+
+    // If the list is empty, set the new cell as the head of the list
     if (list->head == NULL)
     {
         list->head = newCell;
     }
     else
     {
+        // Otherwise, find the last cell in the list
         cell_5 *current = list->head;
         while (next_5(current) != NULL)
         {
             current = next_5(current);
         }
+        // Set the address of the last cell to the new cell
         ass_adr_5(current, newCell);
     }
+
+    // Increase the size of the list
     list->size++;
 }
+
 
 void removeMultiplesLL_5(LinkedList_5 *list, int multiple)
 {
@@ -181,8 +197,10 @@ void destroySublist(LinkedList_5 *sublist)
 // Prime Factorization
 void factorizeNumber_5(int number, LinkedList_5 *initialList)
 {
+    // Create a new linked list to store factors of 'number'
     LinkedList_5 *factorsList = createLinkedList_5();
 
+    // Find factors of 'number' and add them to 'factorsList'
     for (int i = 2; i <= number; i++)
     {
         if (number % i == 0)
@@ -191,12 +209,14 @@ void factorizeNumber_5(int number, LinkedList_5 *initialList)
         }
     }
 
+    // Find the cell in 'initialList' that corresponds to 'number'
     cell_5 *initialListCell = initialList->head;
     while (initialListCell != NULL)
     {
         if (value_5(initialListCell) == number)
         {
-            initialListCell->sublist = factorsList; // Assign sublist to the cell
+            // Assign the factors list to the 'sublist' field of the cell
+            initialListCell->sublist = factorsList;
             break;
         }
         initialListCell = next_5(initialListCell);
@@ -205,12 +225,20 @@ void factorizeNumber_5(int number, LinkedList_5 *initialList)
 
 void printList_5(LinkedList_5 *list)
 {
+    // Start from the head of the list
     cell_5 *current = list->head;
+
+    // Loop through each element in the list
     while (current != NULL)
     {
+        // Print the value of the current element
         printf("%d ", value_5(current));
+
+        // Move to the next element
         current = next_5(current);
     }
+
+    // Print a new line after printing all elements
     printf("\n");
 }
 
@@ -273,33 +301,39 @@ bool areCoprimeLinkedList_5(LinkedList_5 *sublist1, LinkedList_5 *sublist2)
 // Module to print coprime pairs
 void printCoprimePairs_5(LinkedList_5 *list, int n)
 {
-    int count = 0;
-    cell_5 *current1 = list->head;
-    while (current1 != NULL)
+    int count = 0; // Initialize a counter for coprime pairs
+    cell_5 *current1 = list->head; // Start from the head of the list
+    while (current1 != NULL) // Loop through each element in the list
     {
-        int number1 = value_5(current1);
-        LinkedList_5 *sublist1 = current1->sublist;
+        int number1 = value_5(current1); // Get the value of the current element
+        LinkedList_5 *sublist1 = current1->sublist; // Get the sublist of the current element
+
+        // Check if the current element is not 1
         if (number1 != 1)
         {
-            cell_5 *current2 = next_5(current1);
-            while (current2 != NULL)
+            cell_5 *current2 = next_5(current1); // Start from the next element
+            while (current2 != NULL) // Loop through each element after the current element
             {
-                int number2 = value_5(current2);
+                int number2 = value_5(current2); // Get the value of the next element
+                // Check if the two numbers are different
                 if (number1 != number2)
                 {
-                    LinkedList_5 *sublist2 = current2->sublist;
+                    LinkedList_5 *sublist2 = current2->sublist; // Get the sublist of the next element
+                    // Check if the two sublists are coprime
                     if (areCoprime_5(sublist1, sublist2))
                     {
+                        // Print the coprime pair and increment the counter
                         printf("| (%d,%d) |", number1, number2);
                         count++;
                     }
                 }
-                current2 = next_5(current2);
+                current2 = next_5(current2); // Move to the next element
             }
         }
-        current1 = next_5(current1);
+        current1 = next_5(current1); // Move to the next element
     }
     printf("\n");
     printf("1 is co-prime with all the integers in the list.\n");
-    printf("Total coprime pairs involving 1: %d\n", count);
+    printf("Total coprime pairs involving 1: %d\n", count); // Print the total number of coprime pairs involving 1
 }
+
