@@ -34,9 +34,11 @@ The project is organized into several components:
 
 2. Open the project in Code::Blocks.
 
-3. Navigate to the respective files for each question and review the implementation.
+3. Get rid of all the folders except the folder titled `CodeBlocks`.
 
-4. Build and run the project to observe the output and performance metrics.
+4. Navigate to the respective files for each question and review the implementation.
+
+5. Build and run the project to observe the output and performance metrics.
 
 ## Contributors
 
