@@ -191,9 +191,21 @@ void MENU (int *ch)
             printf( "     0) Exit the program \n\n");
             printf("\n");
             printf("\n");
-            printf("Please enter your chocie : ");
-            scanf( " %d", ch );
-            printf( "\n" );
+            while (1) {
+                printf("Please enter your choice: ");
+                if (scanf("%d", ch) == 1) {
+                    // Input is a valid integer
+                    break;
+                } else {
+                    // Input is not a valid integer
+                    printf("Invalid input. Please enter an integer.\n");
+
+                    // Clear the input buffer
+                    while (getchar() != '\n');
+                }
+             }
+
+    printf("You entered: %d\n", ch);
 }
 
 void SearchingPrimeAlgorithm()
