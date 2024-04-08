@@ -31,8 +31,8 @@ typedef struct LinkedList_2
 
 LinkedList_2 *createLinkedList_2();
 void destroyLinkedList_2(LinkedList_2 *list);
-void addToLinkedList_2(LinkedList_2 *list, int element,int *count);
-void removeMultiplesLL_2(LinkedList_2 *list, int multiple,int *count);
+void addToLinkedList_2(LinkedList_2 *list, int element, cell_2 **lastCell, int *count);
+void removeMultiplesLL_2(LinkedList_2 *list, int multiple);
 void generatePrimesLinkedList_2(LinkedList_2 *primes, int n,int *count);
 void createInitialListLinkedList_2(LinkedList_2 *list, int n,int *count);
 void printListLogic_2(cell_2 *head,int *count);

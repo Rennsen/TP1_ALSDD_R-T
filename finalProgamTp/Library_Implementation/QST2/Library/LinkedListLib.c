@@ -84,7 +84,7 @@ void destroyLinkedList_2(LinkedList_2 *list) {
 }
 
 // Adds an element to the linked list
-void addToLinkedList_2(LinkedList_2 *list, int element ,int *count) {
+void addToLinkedList_2(LinkedList_2 *list, int element, cell_2 **lastCell, int *count) {
     cell_2 *newCell;
     allocate_cell_2(&newCell);
     ass_val_2(newCell, element);
@@ -94,37 +94,32 @@ void addToLinkedList_2(LinkedList_2 *list, int element ,int *count) {
     if (list->head == NULL) {
         list->head = newCell;
     } else {
-        cell_2 *current = list->head;
-        while (next_2(current) != NULL) {
-            current = next_2(current);
-            *count+=1;
-        }
-        ass_adr_2(current, newCell);
+        ass_adr_2(*lastCell, newCell);
     }
-
+    *lastCell = newCell;
     list->size++;
 }
 
 // Removes all multiples of a given number (except the number itself) from the linked list
-void removeMultiplesLL_2(LinkedList_2 *list, int multiple,int *count) {
+void removeMultiplesLL_2(LinkedList_2 *list, int multiple) {
     cell_2 *current = list->head;
     while (current != NULL) {
         if (!deleted_2(current) && value_2(current) % multiple == 0 && value_2(current) != multiple) {
             ass_deleted_2(current, true);
         }
-        *count+=1;
         current = next_2(current);
     }
 }
 
 // Generates a linked list of prime numbers up to the given limit
-void generatePrimesLinkedList_2(LinkedList_2 *primes, int n ,int *count) {
-    addToLinkedList_2(primes, 2,count); // Add 2 to the linked list
+void generatePrimesLinkedList_2(LinkedList_2 *primes, int n, int *count) {
+    cell_2 *lastCell = NULL;  // Initialize lastCell to NULL
+    addToLinkedList_2(primes, 2, &lastCell, count); // Add 2 to the linked list
 
     // Add all odd numbers from 3 to n
     for (int i = 3; i <= n; i += 2) {
-        addToLinkedList_2(primes, i,count);
-        *count+=1;
+        addToLinkedList_2(primes, i, &lastCell, count);
+        (*count)++;
     }
 
     // Remove all multiples of each prime number from the list
@@ -134,17 +129,18 @@ void generatePrimesLinkedList_2(LinkedList_2 *primes, int n ,int *count) {
         if (currentPrime * currentPrime > n) {
             break;
         }
-        removeMultiplesLL_2(primes, currentPrime , count);
+        removeMultiplesLL_2(primes, currentPrime);
         current = next_2(current);
-        *count+=1;
+        (*count)++;
     }
 }
 
 // Creates a linked list of numbers from 2 to n
-void createInitialListLinkedList_2(LinkedList_2 *list, int n , int *count) {
+void createInitialListLinkedList_2(LinkedList_2 *list, int n, int *count) {
+    cell_2 *lastCell = NULL;  // Initialize lastCell to NULL
     for (int i = 2; i <= n; i++) {
-        addToLinkedList_2(list, i, count);
-        *count+=1;
+        addToLinkedList_2(list, i, &lastCell, count);
+        (*count)++;
     }
 }
 
@@ -156,7 +152,7 @@ void printListLogic_2(cell_2 *head,int *count) {
             printf("| %d |", value_2(current));
         }
         current = next_2(current);
-        *count+=1;
+        (*count)++;
     }
 }
 
@@ -166,6 +162,6 @@ void printList_2(cell_2 *head,int *count) {
     while (current != NULL) {
         printf("| %d |", value_2(current));
         current = next_2(current);
-        *count+=1;
+        (*count)++;
     }
 }

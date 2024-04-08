@@ -40,6 +40,26 @@ void setValue(DynArrMachine *dam, size_t index, int value) {
     dam->arr[index] = value;
 }
 
+// Sets the deleted flag at the given index of the dynamic array
+void setDeleted(DynArrMachine *dam, size_t index, bool deleted) {
+    // Check if the index is within the bounds of the array
+    if (index < dam->size) {
+        dam->deleted[index] = deleted;
+    }else{
+    return;
+    }
+}
+
+
+// Retrieves the deleted flag at the given index of the dynamic array
+bool getDeleted(DynArrMachine *dam, size_t index) {
+    // Check if the index is within the bounds of the array
+    if (index < dam->size) {
+        return dam->deleted[index];
+    }
+    return false; // Return false if the index is out of bounds
+}
+
 // Expands the capacity of the dynamic array by doubling it
 void expandCapacity(DynArrMachine *dam) {
     // Calculate the new capacity
@@ -61,8 +81,11 @@ void addElement(DynArrMachine *dam, int value) {
     }
 
     // Add the new element to the array and mark it as not deleted
-    dam->arr[dam->size] = value;
-    dam->deleted[dam->size] = false;
+
+    // dam->arr[dam->size] = value;
+    setValue(dam, dam->size, value);
+    // dam->deleted[dam->size] = false;
+    setDeleted(dam, dam->size, false);
     dam->size++;
 }
 
@@ -79,8 +102,9 @@ void printDynamicArray(DynArrMachine *array, int * count) {
 // Removes all multiples of the given number (except the number itself) from the dynamic array
 void removeMultiplesARR(DynArrMachine *dam, int multiple,int * count) {
     for (size_t i = 0; i < dam->size; ++i) {
-        if (!dam->deleted[i] && dam->arr[i] % multiple == 0 && dam->arr[i] != multiple) {
-            dam->deleted[i] = true;
+        if (!getDeleted(dam, i) && dam->arr[i] % multiple == 0 && dam->arr[i] != multiple) {
+            // dam->deleted[i] = true;
+            setDeleted(dam, i, true);
             *count+=1;
         }
     }

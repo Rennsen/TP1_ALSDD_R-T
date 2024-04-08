@@ -15,6 +15,8 @@ typedef struct DynArrMachine
 
 void initDynArray(DynArrMachine **dam, size_t initialCapacity);
 void freeDynArray(DynArrMachine *dam);
+void setDeleted(DynArrMachine *dam, size_t index, bool deleted);
+bool getDeleted(DynArrMachine *dam, size_t index);
 int getValue(DynArrMachine *dam, size_t index);
 void setValue(DynArrMachine *dam, size_t index, int value);
 void expandCapacity(DynArrMachine *dam);

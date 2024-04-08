@@ -130,9 +130,9 @@ int main() {
             case 3:
                 // Clear the screen
                 clearScreen();
-                int count;
+                int count=0;
                 int PrintCount=0;
-                count = 0;// initializing the number of iterations to 0
+                // initializing the number of iterations to 0
                 // Display the user's selection
                 printf("You selected: Search for the prime numbers using Linked Lists\n\n");
 
@@ -160,7 +160,7 @@ int main() {
 
                 // Display the initial list
                 printf("\nInitial List (Linked List): ");
-                printList_2(initialListLL->head,&count);
+                printList_2(initialListLL->head,&PrintCount);
 
                 // Create a linked list for the prime numbers
                 LinkedList_2 *linkedListPrimes = createLinkedList_2();
