@@ -79,7 +79,17 @@ This function generates prime numbers up to a specified value.
 
 - Adding 2 to the dynamic array: O(1)
 - Adding odd numbers to the dynamic array: O(n/2) = O(n) (since we're considering every odd number)
-- Calling `removeMultiplesARR` for each element in the dynamic array (inside the loop): O(n) * O(n) = O(n^2)
+- Calling `removeMultiplesARR` for each element in the dynamic array (inside the loop):
+      The outer loop iterates through the primes->size elements, which is let's say k (the number of prime numbers up to n).
+      For each prime number currentPrime, the function calls removeMultiplesARR(primes, currentPrime).
+      The removeMultiplesARR function has a time complexity of O(n), where n is the size of the primes dynamic array.
+      Therefore, the total time complexity of this step is O(k * n), where k is the number of prime numbers up to n.
+      So, the total time complexity = O(1) + O(n) + O(k * n).
+      To determine the value of k, we can use the Prime Number Theorem again, which states that the number of prime numbers up to n is approximately n / ln(n).
+      Substituting this into the total time complexity expression, we get:
+      Total time complexity = O(1) + O(n) + O((n / ln(n)) * n) = O(1) + O(n) + O(n^2 / ln(n)) = O(n^2 / ln(n)).
+      Since ln(n) grows more slowly than any power of n, we can simplify the time complexity to:
+      Total time complexity = O(n^2)
 - Total: O(n^2)
 
 ### createInitialListDynamicArray
@@ -119,19 +129,21 @@ This part provides a detailed analysis of the time complexity of the main progra
    - Printing the generated primes: \( O(n) \)
 
 5. **Freeing Memory:**
+   - Freeing memory allocated for `initialList`(initial list of integers): \( O(1) \) 
    - Freeing memory allocated for `dynamicPrimes`: \( O(1) \)
 
 Now, let's compute the final sum of complexities:
 
-\[ O(1) + O(1) + O(1) + O(1) + O(1) + O(n) + O(n) + O(n^2) + O(n) + O(1) \]
+\[ O(1) + O(1) + O(1) + O(1) + O(1) + O(n) + O(1) + O(n) + O(n^2) + O(n) + O(1) + O(1) \]
 
 Combining like terms:
 
-\[ O(5 + 3n + n^2) \]
+\[ O(8 + 3n + n^2) \]
 
 Simplify further:
 
-\[ O(n^2) \]
+\[ O(n^2) \]  **Note: This is an approximate time complexity expression since many other O(1) instructions have been ignored and other more complex expressions simplified.**
+              **Please refer to the computation of the complexity of each respective module in the part above**
 
 ## Final Time Complexity
 
@@ -189,7 +201,18 @@ This part provides a detailed analysis of the time complexity of each module in 
    - Adding 2 to the linked list: O(1)
    - Adding odd numbers to the linked list: O(n/2) = O(n)
    - Looping through each cell in the list: O(n)
-   - Calling removeMultiplesLL for each prime number in the list: O(n^2) (since: O(n) * O(n) = O(n^2))
+   - Calling removeMultiplesLL for each prime number in the list:
+      The outer loop iterates through the primes->size elements, which is let's say k (the number of prime numbers up to n).
+      For each prime number currentPrime, the function calls removeMultiplesLL(primes, currentPrime).
+      The removeMultiplesLL function has a time complexity of O(n), where n is the size of the primes dynamic array.
+      Therefore, the total time complexity of this step is O(k * n), where k is the number of prime numbers up to n.
+      So, the total time complexity = O(1) + O(n) + O(k * n).
+      To determine the value of k, we can use the Prime Number Theorem again, which states that the number of prime numbers up to n is approximately n / ln(n).
+      Substituting this into the total time complexity expression, we get:
+      Total time complexity = O(1) + O(n) + O((n / ln(n)) * n) = O(1) + O(n) + O(n^2 / ln(n)) = O(n^2 / ln(n)).
+      Since ln(n) grows more slowly than any power of n, we can simplify the time complexity to:
+      Total time complexity = O(n^2)
+   - Total: O(n^2)
 
 6. **createInitialListLinkedList:**
    - Adding elements to the linked list: O(n)
@@ -215,34 +238,37 @@ The Linked List Library modules exhibit various time complexities ranging from O
 This part provides a detailed analysis of the time complexity of the main program that represents the implementation of the Sieve of Eratosthenes algorithm with the linked list structure "QST2_LinkedList.c".
 
 1. **User Input:**
-   - Declaring integer variable `n`: \( O(1) \)
-   - Printing prompt message: \( O(1) \)
-   - Reading input from the user: \( O(1) \)
+   - Declaring integer variable `n`: O(1)
+   - Printing prompt message: O(1)
+   - Reading input from the user: O(1)
+   - Total: O(1)
 
 2. **Creating Initial List:**
-   - Creating a new linked list: \( O(1) \)
-   - Adding elements to the linked list: \( O(n) \)
-   - Printing the initial list: \( O(n) \)
+   - Creating a new linked list: O(1)
+   - Adding elements to the linked list: O(n)
+   - Printing the initial list: O(n)
 
 3. **Generating Primes:**
-   - Creating a new linked list for primes: \( O(1) \)
-   - Generating primes: \( O(n^2) \)
-   - Printing the generated primes: \( O(n) \)
+   - Creating a new linked list for primes: O(1)
+   - Generating primes: O(n^2)
+   - Printing the generated primes: O(n)
 
 4. **Freeing Memory:**
-   - Freeing memory allocated for the linked list of primes: \( O(n) \)
-
+   - Freeing memory allocated for the initial list of integers: O(n)
+   - Freeing memory allocated for the linked list of primes: O(n)
+   
 Now, let's compute the final sum of complexities:
 
-\[ O(1) + O(1) + O(1) + O(1) + O(n) + O(n) + O(1) + O(n^2) + O(n) + O(n) \]
+\[ O(1) + O(1) + O(1) + O(1) + O(n) + O(n) + O(1) + O(n^2) + O(n) + O(n) + O(n) \]
 
 Combining like terms:
 
-\[ O(5 + 4n + n^2) \]
+\[ O(5 + 5n + n^2) \]
 
 Simplify further:
 
-\[ O(n^2) \]
+\[ O(n^2) \]  **Note: This is an approximate time complexity expression since many other O(1) instructions have been ignored and other more complex expressions simplified.**
+              **Please refer to the computation of the complexity of each respective module in the part above**
 
 ## Final Time Complexity
 
@@ -275,5 +301,3 @@ In this context :
    - In the context of the provided implementation, both dynamic arrays and linked lists exhibit similar time complexity for generating primes, thanks to the use of logical deletion in the dynamic array implementation. The choice between the two structures may depend on factors such as memory management overhead and specific requirements of the application.
 
 ---
-
-

@@ -116,11 +116,11 @@ int main() {
                 freeDynArray(dynamicPrimes);
                 freeDynArray(initialArr);
                 printf("\n\n");
-                printf("For the question 6 : \n");
+                printf("For Question 6 : \n");
                 printf("---------------------\n\n");
-                printf("here is the number of iterations is : %d",countD);
+                printf("The Number Of Iterations Is : : %d",countD);
                 printf("\n\n");
-                printf("here is the total number of iterations with the printing modules : %d",countD+printCountD);
+                printf("The Total Number Of Iterations With Printing Modules : %d",countD+printCountD);
                 // Display a separator
                 printf("\n");
                 printf("\n");
@@ -179,11 +179,11 @@ int main() {
                 destroyLinkedList_2(linkedListPrimes);
                 destroyLinkedList_2(initialListLL);
                 printf("\n\n");
-                printf("For the question 6 : \n");
+                printf("For Question 6 : \n");
                 printf("---------------------\n\n");
-                printf("here is the number of iterations is : %d",count);
+                printf("The Number Of Iterations Is : %d",count);
                 printf("\n\n");
-                printf("here is the total number of iterations with the printing modules : %d",count+PrintCount);
+                printf("The Total Number Of Iterations With Printing Modules : %d",count+PrintCount);
                 // Display a separator
                 printf("\n");
                 printf("\n");
