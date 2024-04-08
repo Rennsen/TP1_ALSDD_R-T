@@ -243,6 +243,7 @@ int main() {
                 printListLogic_3(primesList->head);
 
                 // Create access points for the prime numbers list
+                printf("\n\n");
                 createAccessPoints_3(primesList, range);
                 displayAccessPoints_3(primesList);
 
