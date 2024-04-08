@@ -178,57 +178,60 @@ void printListLogic_3(cell_3 *head)
 
 
 // here ends the generating of the primeList and we start the implementation of the question 3
-void createAccessPoints_3(LinkedList_3 *primesList, int range) {
-    cell_3 *current = primesList->head; // Start from the head of the list
-    AccessPoint_3 *accessPointHead = NULL; // Initialize the access points of the list
-    AccessPoint_3 *accessPointTail = NULL; // Initialize the tail of the access points
-    int count = 0; // Initialize a counter for the current range
+void createAccessPoints_3(LinkedList_3 *primesList, int range)
+{
+    cell_3 *current = primesList->head;
+    AccessPoint_3 *accessPointHead = NULL;
+    AccessPoint_3 *accessPointTail = NULL;
+    int count = 0;
 
-    while (current != NULL) { // Loop through the list until the end
+    while (current != NULL)
+    {
         // Skip over cells with the 'deleted' field set to true
-        while (current != NULL && deleted_3(current)) {
-            current = next_3(current);
+        while (current != NULL && current->deleted)
+        {
+            current = current->next;
         }
 
-        if (current == NULL) { // If we reach the end of the list, exit the loop
+        if (current == NULL)
+        {
             break;
         }
 
-        if (count == 0) { // If the counter is 0, start a new range
-            // Create a new access point and set its head
+        if (count == 0)
+        {
             AccessPoint_3 *newAP = (AccessPoint_3 *)malloc(sizeof(AccessPoint_3));
             newAP->head = current;
             newAP->next = NULL;
-            if (accessPointHead == NULL) {
+            if (accessPointHead == NULL)
+            {
                 accessPointHead = accessPointTail = newAP;
-            } else {
+            }
+            else
+            {
                 accessPointTail->next = newAP;
                 accessPointTail = newAP;
             }
         }
 
-        count++; // Increment the counter for the current range
+        count++;
 
-        if (count == range) { // If we reach the specified range, set the tail of the current access point
-            // Find the last non-deleted cell within the current range
-            cell_3 *lastCell = current;
-            while (next_3(lastCell) != NULL && !deleted_3(next_3(lastCell))) {
-                lastCell = next_3(lastCell);
-            }
-            accessPointTail->tail = lastCell; // Set the tail of the current access point
-            count = 0; // Reset the counter for the next range
+        if (count == range)
+        {
+            accessPointTail->tail = current;
+            count = 0;
         }
 
-        current = next_3(current); // Move to the next cell in the list
+        current = current->next;
     }
 
-    if (accessPointTail != NULL) { // If there is at least one access point, set the tail of the last access point to NULL
+    if (accessPointTail != NULL)
+    {
         accessPointTail->tail = NULL;
     }
 
-    primesList->accessPoints = accessPointHead; // Set the access points of the list
+    primesList->accessPoints = accessPointHead;
 }
-
 
 void searchPrimesInInterval_3(LinkedList_3 *primesList, int start, int end)
 {

@@ -139,9 +139,10 @@ void removeMultiplesLL_5(LinkedList_5 *list, int multiple)
     cell_5 *current = list->head;
     while (current != NULL)
     {
-        if (!current->deleted && value_5(current) % multiple == 0 && value_5(current) != multiple)
+        if (!deleted_5(current) && value_5(current) % multiple == 0 && value_5(current) != multiple)
         {
-            current->deleted = true;
+            ass_deleted_5(current,true);
+
         }
         current = next_5(current);
     }
@@ -334,6 +335,6 @@ void printCoprimePairs_5(LinkedList_5 *list, int n)
     }
     printf("\n");
     printf("1 is co-prime with all the integers in the list.\n");
-    printf("Total coprime pairs involving 1: %d\n", count); // Print the total number of coprime pairs involving 1
+    printf("Total co-prime pairs involving 1: %d\n", n-1); // Print the total number of coprime pairs involving 1
 }
 
