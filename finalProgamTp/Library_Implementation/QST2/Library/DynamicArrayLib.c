@@ -34,11 +34,13 @@ int getValue(DynArrMachine *dam, size_t index) {
 // Sets the value at the given index of the dynamic array
 void setValue(DynArrMachine *dam, size_t index, int value) {
     // Check if the index is within the bounds of the array
-    if (index >= dam->size) {
-        return; // Do nothing if the index is out of bounds
+    if (index < dam->size) {
+        dam->arr[index] = value;
+    }else{
+    return;
     }
-    dam->arr[index] = value;
 }
+
 
 // Sets the deleted flag at the given index of the dynamic array
 void setDeleted(DynArrMachine *dam, size_t index, bool deleted) {
@@ -82,8 +84,8 @@ void addElement(DynArrMachine *dam, int value) {
 
     // Add the new element to the array and mark it as not deleted
 
-    // dam->arr[dam->size] = value;
-    setValue(dam, dam->size, value);
+    dam->arr[dam->size] = value;
+    // setValue(dam, dam->size, value);
     // dam->deleted[dam->size] = false;
     setDeleted(dam, dam->size, false);
     dam->size++;
